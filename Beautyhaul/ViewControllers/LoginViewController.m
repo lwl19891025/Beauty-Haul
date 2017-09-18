@@ -47,17 +47,28 @@
     }
     else if ([_signinView.doneButton isEqual:sender]){
         //sign in success
+        if ([self.delegate respondsToSelector:@selector(loginViewDidSignin:)]) {
+            [self.delegate loginViewDidSignin:self];
+        }
     }
     else if ([_signupView.doneButton isEqual:sender]){
         [self displayContentView:self.createNicknameView];
     }
     else if ([_createNicknameView.doneButton isEqual:sender]){
         //sign in success
+        if ([self.delegate respondsToSelector:@selector(loginViewDidSignin:)]) {
+            [self.delegate loginViewDidSignin:self];
+        }
     }
 }
 
 - (void)backButtonClick:(UIButton *)sender{
-    if ([_signinView.backButton isEqual:sender]) {
+    if ([self.backButton isEqual:sender]) {
+        if ([self.delegate respondsToSelector:@selector(loginViewDidGoBack:)]) {
+            [self.delegate loginViewDidGoBack:self];
+        }
+    }
+    else if ([_signinView.backButton isEqual:sender]) {
         [self removeContentView:self.signinView];
     }
     else if ([_signupView.backButton isEqual:sender]){

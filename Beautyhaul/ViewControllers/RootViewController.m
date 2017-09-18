@@ -12,7 +12,7 @@
 #import "BHTabBarController.h"
 #import "LoginViewController.h"
 
-@interface RootViewController ()<IntroductionViewDelegate>
+@interface RootViewController ()<IntroductionViewDelegate, LoginViewDelegate>
 @property (weak, nonatomic) UIViewController *introductionVC;
 @property (weak, nonatomic) LoginViewController *loginVC;
 @end
@@ -35,13 +35,7 @@
 }
 
 - (UIViewController *)childViewControllerForStatusBarHidden{
-    if (self.introductionVC) {
-        return self.introductionVC;
-    }
-    else if (self.loginVC){
-        return self.loginVC;
-    }
-    return nil;
+    return self.childViewControllers.firstObject;
 }
 
 - (BOOL)prefersStatusBarHidden{
@@ -49,33 +43,23 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - IntroductionViewDelegate
 - (void)continueLoginWithFacebook:(IntroductionViewController *)vc{
-    [UIView animateWithDuration:0.25 animations:^{
-        vc.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        [self displayChildViewController:loginVC];
-        [self hidesChildViewController:vc];
-        self.introductionVC = nil;
-        self.loginVC = loginVC;
-        [self setNeedsStatusBarAppearanceUpdate];
-    }];
+//    [UIView animateWithDuration:0.25 animations:^{
+//
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 - (void)continueLoginWithEmail:(IntroductionViewController *)vc{
     [UIView animateWithDuration:0.25 animations:^{
         vc.view.alpha = 0;
     } completion:^(BOOL finished) {
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        [self displayChildViewController:loginVC];
-        [self hidesChildViewController:vc];
-        self.introductionVC = nil;
-        self.loginVC = loginVC;
-        [self setNeedsStatusBarAppearanceUpdate];
+        [self requireSigninOrUp];
     }];
 }
 
@@ -83,12 +67,37 @@
     [UIView animateWithDuration:0.25 animations:^{
         vc.view.alpha = 0;
     } completion:^(BOOL finished) {
+        [self requireSigninOrUp];
+    }];
+}
+
+#pragma mark - LoginViewDelegate
+- (void)loginViewDidGoBack:(LoginViewController *)loginViewController{
+    [self hidesChildViewController:loginViewController];
+    self.loginVC = nil;
+    self.introductionVC.view.alpha = 1;
+}
+
+- (void)loginViewDidSignin:(LoginViewController *)loginViewController{
+    [UIView animateWithDuration:0.25 animations:^{
+        loginViewController.view.alpha = 0;
+    } completion:^(BOOL finished) {
         BHTabBarController *mainVC = [[BHTabBarController alloc] init];
         [self displayChildViewController:mainVC];
-        [self hidesChildViewController:vc];
+        [self hidesChildViewController:self.loginVC];
+        [self hidesChildViewController:self.introductionVC];
         self.introductionVC = nil;
+        self.loginVC = nil;
         [self setNeedsStatusBarAppearanceUpdate];
     }];
+}
+
+#pragma mark - privates
+- (void)requireSigninOrUp{
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self displayChildViewController:loginVC];
+    loginVC.delegate = self;
+    self.loginVC = loginVC;
 }
 
 @end
