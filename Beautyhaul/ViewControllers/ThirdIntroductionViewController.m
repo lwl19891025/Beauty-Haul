@@ -58,6 +58,9 @@ static CGSize kLoginButtonSize = (CGSize){285, 52};
 - (UIButton *)faceBookLoginButton{
     if (!_faceBookLoginButton) {
         _faceBookLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_faceBookLoginButton setBackgroundColor:[UIColor whiteColor]];
+        [_faceBookLoginButton setTitleColor:[UIColor colorWithWhite:0.2 alpha:1.] forState:UIControlStateNormal];
+        [_faceBookLoginButton setTitle:@"continue with facebook" forState:UIControlStateNormal];
         [_faceBookLoginButton addTarget:self action:@selector(loginWithFacebook:) forControlEvents:UIControlEventTouchUpInside];
         _faceBookLoginButton.layer.cornerRadius = kLoginButtonSize.height/2.;
     }
@@ -67,6 +70,9 @@ static CGSize kLoginButtonSize = (CGSize){285, 52};
 - (UIButton *)emailLoginButton{
     if (!_emailLoginButton) {
         _emailLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_emailLoginButton setBackgroundColor:[UIColor whiteColor]];
+        [_emailLoginButton setTitle:@"continue with email" forState:UIControlStateNormal];
+        [_emailLoginButton setTitleColor:[UIColor colorWithWhite:0.2 alpha:1.] forState:UIControlStateNormal];
         [_emailLoginButton addTarget:self action:@selector(loginWithEmail:) forControlEvents:UIControlEventTouchUpInside];
         _emailLoginButton.layer.cornerRadius = kLoginButtonSize.height/2.;
     }

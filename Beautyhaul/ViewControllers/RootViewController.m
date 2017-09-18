@@ -56,38 +56,51 @@
 }
 
 - (void)continueLoginWithEmail:(IntroductionViewController *)vc{
+    [self requireSigninOrUp];
+    self.loginVC.view.frame = CGRectMake(CGRectGetWidth(self.view.bounds), 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
     [UIView animateWithDuration:0.25 animations:^{
-        vc.view.alpha = 0;
+        self.loginVC.view.frame = self.view.bounds;
     } completion:^(BOOL finished) {
-        [self requireSigninOrUp];
+        
     }];
 }
 
 - (void)skipIntroduction:(IntroductionViewController *)vc{
+    [self requireSigninOrUp];
+    self.loginVC.view.frame = CGRectMake(CGRectGetWidth(self.view.bounds), 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
     [UIView animateWithDuration:0.25 animations:^{
-        vc.view.alpha = 0;
+        self.loginVC.view.frame = self.view.bounds;
     } completion:^(BOOL finished) {
-        [self requireSigninOrUp];
+        
     }];
 }
 
 #pragma mark - LoginViewDelegate
 - (void)loginViewDidGoBack:(LoginViewController *)loginViewController{
-    [self hidesChildViewController:loginViewController];
-    self.loginVC = nil;
-    self.introductionVC.view.alpha = 1;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.loginVC.view.frame = CGRectMake(CGRectGetWidth(self.view.bounds), 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+    } completion:^(BOOL finished) {
+        [self hidesChildViewController:loginViewController];
+        self.loginVC = nil;
+    }];
 }
 
 - (void)loginViewDidSignin:(LoginViewController *)loginViewController{
-    [UIView animateWithDuration:0.25 animations:^{
-        loginViewController.view.alpha = 0;
+    UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:NO];
+    BHTabBarController *mainVC = [[BHTabBarController alloc] init];
+    [self displayChildViewController:mainVC];
+    [self hidesChildViewController:self.loginVC];
+    [self hidesChildViewController:self.introductionVC];
+    self.introductionVC = nil;
+    self.loginVC = nil;
+    snapshot.frame = self.view.bounds;
+    [self.view addSubview:snapshot];
+    
+    [UIView animateWithDuration:1 animations:^{
+        snapshot.transform = CGAffineTransformMakeScale(1.5, 1.5);
+        snapshot.alpha = 0.5;
     } completion:^(BOOL finished) {
-        BHTabBarController *mainVC = [[BHTabBarController alloc] init];
-        [self displayChildViewController:mainVC];
-        [self hidesChildViewController:self.loginVC];
-        [self hidesChildViewController:self.introductionVC];
-        self.introductionVC = nil;
-        self.loginVC = nil;
+        [snapshot removeFromSuperview];
         [self setNeedsStatusBarAppearanceUpdate];
     }];
 }
