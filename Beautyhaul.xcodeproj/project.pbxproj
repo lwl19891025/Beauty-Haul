@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A11A37B1F700D7D00777B47 /* HomePollTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11A3791F700D7D00777B47 /* HomePollTableViewCell.m */; };
+		3A11A37C1F700D7D00777B47 /* HomePollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11A37A1F700D7D00777B47 /* HomePollTableViewCell.xib */; };
+		3A11A3801F700DAB00777B47 /* HomeVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11A37E1F700DAB00777B47 /* HomeVideoTableViewCell.m */; };
+		3A11A3811F700DAB00777B47 /* HomeVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11A37F1F700DAB00777B47 /* HomeVideoTableViewCell.xib */; };
+		3A11A3851F700DB900777B47 /* HomeBlogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11A3831F700DB900777B47 /* HomeBlogTableViewCell.m */; };
+		3A11A3861F700DB900777B47 /* HomeBlogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11A3841F700DB900777B47 /* HomeBlogTableViewCell.xib */; };
+		3A11A38F1F700DF600777B47 /* HomeQATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11A38D1F700DF600777B47 /* HomeQATableViewCell.m */; };
+		3A11A3901F700DF600777B47 /* HomeQATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11A38E1F700DF600777B47 /* HomeQATableViewCell.xib */; };
 		3A12ED041F6EBD7A000DEFBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A12ED031F6EBD7A000DEFBA /* main.m */; };
 		3A12ED071F6EBD7A000DEFBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A12ED061F6EBD7A000DEFBA /* AppDelegate.m */; };
 		3A12ED0F1F6EBD7A000DEFBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A12ED0E1F6EBD7A000DEFBA /* Assets.xcassets */; };
@@ -60,6 +68,18 @@
 /* Begin PBXFileReference section */
 		0EBEAB15241DE6E2B47BCF07 /* Pods-BeautyhaulUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2A3E8E0ED310F6EFD3E8A79A /* Pods-BeautyhaulTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulTests/Pods-BeautyhaulTests.release.xcconfig"; sourceTree = "<group>"; };
+		3A11A3781F700D7D00777B47 /* HomePollTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePollTableViewCell.h; sourceTree = "<group>"; };
+		3A11A3791F700D7D00777B47 /* HomePollTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePollTableViewCell.m; sourceTree = "<group>"; };
+		3A11A37A1F700D7D00777B47 /* HomePollTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePollTableViewCell.xib; sourceTree = "<group>"; };
+		3A11A37D1F700DAB00777B47 /* HomeVideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVideoTableViewCell.h; sourceTree = "<group>"; };
+		3A11A37E1F700DAB00777B47 /* HomeVideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVideoTableViewCell.m; sourceTree = "<group>"; };
+		3A11A37F1F700DAB00777B47 /* HomeVideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVideoTableViewCell.xib; sourceTree = "<group>"; };
+		3A11A3821F700DB900777B47 /* HomeBlogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBlogTableViewCell.h; sourceTree = "<group>"; };
+		3A11A3831F700DB900777B47 /* HomeBlogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBlogTableViewCell.m; sourceTree = "<group>"; };
+		3A11A3841F700DB900777B47 /* HomeBlogTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeBlogTableViewCell.xib; sourceTree = "<group>"; };
+		3A11A38C1F700DF600777B47 /* HomeQATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeQATableViewCell.h; sourceTree = "<group>"; };
+		3A11A38D1F700DF600777B47 /* HomeQATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeQATableViewCell.m; sourceTree = "<group>"; };
+		3A11A38E1F700DF600777B47 /* HomeQATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeQATableViewCell.xib; sourceTree = "<group>"; };
 		3A12ECFF1F6EBD7A000DEFBA /* Beautyhaul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beautyhaul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A12ED031F6EBD7A000DEFBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A12ED051F6EBD7A000DEFBA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -152,6 +172,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A11A3721F700C1E00777B47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A11A3781F700D7D00777B47 /* HomePollTableViewCell.h */,
+				3A11A3791F700D7D00777B47 /* HomePollTableViewCell.m */,
+				3A11A37A1F700D7D00777B47 /* HomePollTableViewCell.xib */,
+				3A11A37D1F700DAB00777B47 /* HomeVideoTableViewCell.h */,
+				3A11A37E1F700DAB00777B47 /* HomeVideoTableViewCell.m */,
+				3A11A37F1F700DAB00777B47 /* HomeVideoTableViewCell.xib */,
+				3A11A3821F700DB900777B47 /* HomeBlogTableViewCell.h */,
+				3A11A3831F700DB900777B47 /* HomeBlogTableViewCell.m */,
+				3A11A3841F700DB900777B47 /* HomeBlogTableViewCell.xib */,
+				3A11A38C1F700DF600777B47 /* HomeQATableViewCell.h */,
+				3A11A38D1F700DF600777B47 /* HomeQATableViewCell.m */,
+				3A11A38E1F700DF600777B47 /* HomeQATableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3A12ECF61F6EBD7A000DEFBA = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +216,7 @@
 		3A12ED011F6EBD7A000DEFBA /* Beautyhaul */ = {
 			isa = PBXGroup;
 			children = (
+				3A11A3721F700C1E00777B47 /* Views */,
 				3A12ED761F6EBE1F000DEFBA /* Categories */,
 				3A12ED371F6EBE05000DEFBA /* ViewControllers */,
 				3A12ED051F6EBD7A000DEFBA /* AppDelegate.h */,
@@ -489,9 +529,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A11A3811F700DAB00777B47 /* HomeVideoTableViewCell.xib in Resources */,
 				3A12ED731F6EBE05000DEFBA /* SignInOrUpView.xib in Resources */,
 				3A12ED121F6EBD7A000DEFBA /* LaunchScreen.storyboard in Resources */,
+				3A11A37C1F700D7D00777B47 /* HomePollTableViewCell.xib in Resources */,
+				3A11A3861F700DB900777B47 /* HomeBlogTableViewCell.xib in Resources */,
 				3A12ED0F1F6EBD7A000DEFBA /* Assets.xcassets in Resources */,
+				3A11A3901F700DF600777B47 /* HomeQATableViewCell.xib in Resources */,
 				3A12ED6A1F6EBE05000DEFBA /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,6 +708,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A11A3801F700DAB00777B47 /* HomeVideoTableViewCell.m in Sources */,
 				3A12ED071F6EBD7A000DEFBA /* AppDelegate.m in Sources */,
 				3A12ED601F6EBE05000DEFBA /* UIViewController+Content.m in Sources */,
 				3A12ED751F6EBE05000DEFBA /* VideoViewController.m in Sources */,
@@ -677,6 +722,9 @@
 				3A12ED611F6EBE05000DEFBA /* BHTabBarController.m in Sources */,
 				3A12ED661F6EBE05000DEFBA /* HomeViewController.m in Sources */,
 				3A12ED671F6EBE05000DEFBA /* IntroductionViewController.m in Sources */,
+				3A11A3851F700DB900777B47 /* HomeBlogTableViewCell.m in Sources */,
+				3A11A37B1F700D7D00777B47 /* HomePollTableViewCell.m in Sources */,
+				3A11A38F1F700DF600777B47 /* HomeQATableViewCell.m in Sources */,
 				3A12ED6D1F6EBE05000DEFBA /* PollViewController.m in Sources */,
 				3A12ED041F6EBD7A000DEFBA /* main.m in Sources */,
 				3A12ED691F6EBE05000DEFBA /* LoginViewController.m in Sources */,
