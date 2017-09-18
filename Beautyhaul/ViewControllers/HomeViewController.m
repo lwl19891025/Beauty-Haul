@@ -11,26 +11,33 @@
 #import "BlogViewController.h"
 #import "QAViewController.h"
 #import "PollViewController.h"
+#import "HomePollTableViewCell.h"
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataSource;
 @end
 
+static NSString *const kPollCellReuseIdentifier = @"pollCellReuseIdentifier";
+static NSString *const kBlogCellReuseIdentifier = @"blogCellReuseIdentifier";
+static NSString *const kVideoCellReuseIdentifier = @"videoCellReuseIdentifier";
+static NSString *const kQACellReuseIdentifier = @"q&aCellReuseIdentifier";
+
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self generateDataSource];
-    self.hidesBottomBarWhenPushed = YES;
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellReuseIdentifier"];
+    UINib *pollCell = [UINib nibWithNibName:NSStringFromClass([HomePollTableViewCell class]) bundle:nil];
+    [self.tableView registerNib:pollCell forCellReuseIdentifier:kPollCellReuseIdentifier];
 }
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     self.tableView.frame = self.view.bounds;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, self.bottomLayoutGuide.length, 0);
 }
 
@@ -52,9 +59,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuseIdentifier" forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"cell%@", @(indexPath.row)];
+    HomePollTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPollCellReuseIdentifier forIndexPath:indexPath];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 310;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

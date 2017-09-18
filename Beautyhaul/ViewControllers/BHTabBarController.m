@@ -24,14 +24,13 @@
     [super viewDidLoad];
     
     NavigationViewController *homeNav = [[NavigationViewController alloc] initWithRootViewController:[HomeViewController new]];
-     NavigationViewController *findNav = [[NavigationViewController alloc] initWithRootViewController:[FindViewController new]];
+    NavigationViewController *findNav = [[NavigationViewController alloc] initWithRootViewController:[FindViewController new]];
     NavigationViewController *compose = [[NavigationViewController alloc] initWithRootViewController:[ComposeViewController new]];
     NavigationViewController *message = [[NavigationViewController alloc] initWithRootViewController:[MessageViewController new]];
     NavigationViewController *profile = [[NavigationViewController alloc] initWithRootViewController:[ProfileViewController new]];
     
     self.viewControllers = @[homeNav, findNav, compose, message, profile];
-    [self.tabBar setBarTintColor:[UIColor colorWithWhite:36./255 alpha:1.]];
-    [self.tabBar setTintColor:[UIColor whiteColor]];
+    [self.tabBar setTintColor:[UIColor colorWithWhite:36./255 alpha:1.]];
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         switch (idx) {
             case 0:
@@ -69,18 +68,17 @@
     [super viewWillAppear:animated];
 }
 
+- (BOOL)prefersStatusBarHidden{
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
