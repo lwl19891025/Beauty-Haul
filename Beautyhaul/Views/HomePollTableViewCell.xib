@@ -291,6 +291,10 @@
                     <constraint firstItem="jwn-xo-GH8" firstAttribute="leading" secondItem="d3r-JK-Fqi" secondAttribute="trailing" constant="8" id="za7-Te-seI"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="avator" destination="d3r-JK-Fqi" id="pdC-6f-fTv"/>
+                <outlet property="nameLabel" destination="jwn-xo-GH8" id="kNu-qF-zIl"/>
+            </connections>
             <point key="canvasLocation" x="34" y="187"/>
         </tableViewCell>
     </objects>

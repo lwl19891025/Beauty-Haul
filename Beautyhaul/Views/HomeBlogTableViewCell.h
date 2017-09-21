@@ -6,8 +6,8 @@
 //  Copyright © 2017年 beauty-haul. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HomeTableViewCell.h"
 
-@interface HomeBlogTableViewCell : UITableViewCell
+@interface HomeBlogTableViewCell : HomeTableViewCell
 
 @end

@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"Compose";
+    self.title = @"Compose";
     // Do any additional setup after loading the view.
 }
 

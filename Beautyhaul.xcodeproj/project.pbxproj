@@ -43,6 +43,7 @@
 		3A12ED731F6EBE05000DEFBA /* SignInOrUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A12ED5B1F6EBE05000DEFBA /* SignInOrUpView.xib */; };
 		3A12ED741F6EBE05000DEFBA /* ThirdIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A12ED5D1F6EBE05000DEFBA /* ThirdIntroductionViewController.m */; };
 		3A12ED751F6EBE05000DEFBA /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A12ED5F1F6EBE05000DEFBA /* VideoViewController.m */; };
+		3A283AA11F7161990045CDC0 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */; };
 		AED8A0920568F58C38107867 /* libPods-Beautyhaul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24F98089CDFCA0D7799C2DC /* libPods-Beautyhaul.a */; };
 		BAD7EF2A55E061262128C1D6 /* libPods-BeautyhaulUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA09C74EE99A673C7603A97 /* libPods-BeautyhaulUITests.a */; };
 		DAB55A068E6B14702ACFDD93 /* libPods-BeautyhaulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */; };
@@ -135,6 +136,8 @@
 		3A12ED5D1F6EBE05000DEFBA /* ThirdIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdIntroductionViewController.m; sourceTree = "<group>"; };
 		3A12ED5E1F6EBE05000DEFBA /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		3A12ED5F1F6EBE05000DEFBA /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		3A283A9F1F7161990045CDC0 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		5ECEFDDCB1D9FD4868196D1E /* Pods-BeautyhaulUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeautyhaulTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA448700C5300C67108B6E /* Pods-Beautyhaul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beautyhaul.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beautyhaul/Pods-Beautyhaul.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 		3A11A3721F700C1E00777B47 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A283A9F1F7161990045CDC0 /* HomeTableViewCell.h */,
+				3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */,
 				3A11A3781F700D7D00777B47 /* HomePollTableViewCell.h */,
 				3A11A3791F700D7D00777B47 /* HomePollTableViewCell.m */,
 				3A11A37A1F700D7D00777B47 /* HomePollTableViewCell.xib */,
@@ -722,6 +727,7 @@
 				3A12ED611F6EBE05000DEFBA /* BHTabBarController.m in Sources */,
 				3A12ED661F6EBE05000DEFBA /* HomeViewController.m in Sources */,
 				3A12ED671F6EBE05000DEFBA /* IntroductionViewController.m in Sources */,
+				3A283AA11F7161990045CDC0 /* HomeTableViewCell.m in Sources */,
 				3A11A3851F700DB900777B47 /* HomeBlogTableViewCell.m in Sources */,
 				3A11A37B1F700D7D00777B47 /* HomePollTableViewCell.m in Sources */,
 				3A11A38F1F700DF600777B47 /* HomeQATableViewCell.m in Sources */,

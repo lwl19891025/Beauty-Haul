@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"Find";
+    self.title = @"Find";
     // Do any additional setup after loading the view.
 }
 
