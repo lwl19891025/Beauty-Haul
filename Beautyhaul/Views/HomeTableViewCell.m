@@ -1,14 +1,14 @@
 //
-//  HomeBlogTableViewCell.m
+//  HomeTableViewCell.m
 //  Beautyhaul
 //
-//  Created by liuweiliang on 2017/9/18.
+//  Created by liuweiliang on 2017/9/19.
 //  Copyright © 2017年 beauty-haul. All rights reserved.
 //
 
-#import "HomeBlogTableViewCell.h"
+#import "HomeTableViewCell.h"
 
-@implementation HomeBlogTableViewCell
+@implementation HomeTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -17,6 +17,8 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
 }
 
 @end
