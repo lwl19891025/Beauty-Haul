@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, ContentType){
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataSource;
+@property (strong, nonatomic) NSDictionary *detailClass;
 @end
 
 static NSString *const kPollCellReuseIdentifier = @"pollCellReuseIdentifier";
@@ -83,6 +84,12 @@ static NSString *const kQACellReuseIdentifier = @"q&aCellReuseIdentifier";
                         @{@"type":@(BlogContentType), @"name":@"Hahahahah",@"avator":@"avator4"},
                         @{@"type":@(QAContentType), @"name":@"Shi zai bu zhi jiao sha",@"avator":@"avator3"},
                         @{@"type":@(VideoContentType), @"name":@"Qi ming zhen nan",@"avator":@"avator1"}];
+    self.detailClass = @{@(QAContentType)   : NSStringFromClass([QAViewController class]),
+                         @(PollContentType) : NSStringFromClass([PollViewController class]),
+                         @(VideoContentType): NSStringFromClass([VideoViewController class]),
+                         @(BlogContentType) : NSStringFromClass([BlogViewController class])};
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,9 +133,21 @@ static NSString *const kQACellReuseIdentifier = @"q&aCellReuseIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    VideoViewController *video = [VideoViewController new];
+    ContentType type = [[self.dataSource[indexPath.row] objectForKey:@"type"] integerValue];
+    Class theClass = NSClassFromString(self.detailClass[@(type)]);
+    UIViewController *vc = [theClass new];
+    
+//    VideoViewController *video = [VideoViewController new];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:video animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        UIGraphicsBeginImageContextWithOptions(cell.contentView.bounds.size, cell.contentView.opaque, 0.0f);
+//        [cell.contentView drawViewHierarchyInRect:cell.contentView.bounds afterScreenUpdates:NO];
+//        UIImage *snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        video.image = snapshotImageFromMyView;
+//    });
 }
 
 - (UITableView *)tableView{

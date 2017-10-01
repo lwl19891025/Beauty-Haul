@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoViewController : UIViewController
-
+@property (strong, nonatomic) UIImage *image;
 @end
