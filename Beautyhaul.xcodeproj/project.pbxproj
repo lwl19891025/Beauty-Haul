@@ -45,6 +45,7 @@
 		3A12ED751F6EBE05000DEFBA /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A12ED5F1F6EBE05000DEFBA /* VideoViewController.m */; };
 		3A283AA11F7161990045CDC0 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */; };
 		3A73D22E1F7BEF1E009167F8 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */; };
+		3ABAAD4E1F73F4E00009953C /* BlogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */; };
 		AED8A0920568F58C38107867 /* libPods-Beautyhaul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24F98089CDFCA0D7799C2DC /* libPods-Beautyhaul.a */; };
 		BAD7EF2A55E061262128C1D6 /* libPods-BeautyhaulUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA09C74EE99A673C7603A97 /* libPods-BeautyhaulUITests.a */; };
 		DAB55A068E6B14702ACFDD93 /* libPods-BeautyhaulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */; };
@@ -141,6 +142,8 @@
 		3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		3A73D22C1F7BEF1E009167F8 /* ProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
 		3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
+		3ABAAD4C1F73F4E00009953C /* BlogEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogEditViewController.h; sourceTree = "<group>"; };
+		3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogEditViewController.m; sourceTree = "<group>"; };
 		5ECEFDDCB1D9FD4868196D1E /* Pods-BeautyhaulUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeautyhaulTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA448700C5300C67108B6E /* Pods-Beautyhaul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beautyhaul.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beautyhaul/Pods-Beautyhaul.release.xcconfig"; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 			children = (
 				3A12ED3C1F6EBE05000DEFBA /* ComposeViewController.h */,
 				3A12ED3D1F6EBE05000DEFBA /* ComposeViewController.m */,
+				3ABAAD4C1F73F4E00009953C /* BlogEditViewController.h */,
+				3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */,
 			);
 			name = Compose;
 			sourceTree = "<group>";
@@ -730,6 +735,7 @@
 				3A12ED631F6EBE05000DEFBA /* ComposeViewController.m in Sources */,
 				3A12ED721F6EBE05000DEFBA /* SignInOrUpView.m in Sources */,
 				3A12ED611F6EBE05000DEFBA /* BHTabBarController.m in Sources */,
+				3ABAAD4E1F73F4E00009953C /* BlogEditViewController.m in Sources */,
 				3A73D22E1F7BEF1E009167F8 /* ProductViewController.m in Sources */,
 				3A12ED661F6EBE05000DEFBA /* HomeViewController.m in Sources */,
 				3A12ED671F6EBE05000DEFBA /* IntroductionViewController.m in Sources */,
