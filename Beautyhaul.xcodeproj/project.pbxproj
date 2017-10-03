@@ -45,7 +45,10 @@
 		3A12ED751F6EBE05000DEFBA /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A12ED5F1F6EBE05000DEFBA /* VideoViewController.m */; };
 		3A283AA11F7161990045CDC0 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */; };
 		3A73D22E1F7BEF1E009167F8 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */; };
+		3A77709E1F81BE63006D3F93 /* BHXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A77709D1F81BE63006D3F93 /* BHXMLParser.m */; };
+		3A7770A41F81CB3A006D3F93 /* blog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A7770A31F81CB3A006D3F93 /* blog.xml */; };
 		3ABAAD4E1F73F4E00009953C /* BlogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */; };
+		3AE5736F1F83D7E30039A408 /* BlogCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE5736E1F83D7E30039A408 /* BlogCommentTableViewCell.m */; };
 		AED8A0920568F58C38107867 /* libPods-Beautyhaul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24F98089CDFCA0D7799C2DC /* libPods-Beautyhaul.a */; };
 		BAD7EF2A55E061262128C1D6 /* libPods-BeautyhaulUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA09C74EE99A673C7603A97 /* libPods-BeautyhaulUITests.a */; };
 		DAB55A068E6B14702ACFDD93 /* libPods-BeautyhaulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */; };
@@ -142,8 +145,13 @@
 		3A283AA01F7161990045CDC0 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		3A73D22C1F7BEF1E009167F8 /* ProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
 		3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
+		3A77709C1F81BE63006D3F93 /* BHXMLParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHXMLParser.h; sourceTree = "<group>"; };
+		3A77709D1F81BE63006D3F93 /* BHXMLParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHXMLParser.m; sourceTree = "<group>"; };
+		3A7770A31F81CB3A006D3F93 /* blog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blog.xml; sourceTree = "<group>"; };
 		3ABAAD4C1F73F4E00009953C /* BlogEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogEditViewController.h; sourceTree = "<group>"; };
 		3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogEditViewController.m; sourceTree = "<group>"; };
+		3AE5736D1F83D7E30039A408 /* BlogCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogCommentTableViewCell.h; sourceTree = "<group>"; };
+		3AE5736E1F83D7E30039A408 /* BlogCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogCommentTableViewCell.m; sourceTree = "<group>"; };
 		5ECEFDDCB1D9FD4868196D1E /* Pods-BeautyhaulUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeautyhaulTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA448700C5300C67108B6E /* Pods-Beautyhaul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beautyhaul.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beautyhaul/Pods-Beautyhaul.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,6 +235,7 @@
 		3A12ED011F6EBD7A000DEFBA /* Beautyhaul */ = {
 			isa = PBXGroup;
 			children = (
+				3A7770A31F81CB3A006D3F93 /* blog.xml */,
 				3A11A3721F700C1E00777B47 /* Views */,
 				3A12ED761F6EBE1F000DEFBA /* Categories */,
 				3A12ED371F6EBE05000DEFBA /* ViewControllers */,
@@ -364,6 +373,10 @@
 				3A12ED3B1F6EBE05000DEFBA /* BlogViewController.m */,
 				3A73D22C1F7BEF1E009167F8 /* ProductViewController.h */,
 				3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */,
+				3A77709C1F81BE63006D3F93 /* BHXMLParser.h */,
+				3A77709D1F81BE63006D3F93 /* BHXMLParser.m */,
+				3AE5736D1F83D7E30039A408 /* BlogCommentTableViewCell.h */,
+				3AE5736E1F83D7E30039A408 /* BlogCommentTableViewCell.m */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -505,6 +518,7 @@
 				TargetAttributes = {
 					3A12ECFE1F6EBD7A000DEFBA = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = E93236E44M;
 						ProvisioningStyle = Automatic;
 					};
 					3A12ED171F6EBD7A000DEFBA = {
@@ -547,6 +561,7 @@
 				3A11A3811F700DAB00777B47 /* HomeVideoTableViewCell.xib in Resources */,
 				3A12ED731F6EBE05000DEFBA /* SignInOrUpView.xib in Resources */,
 				3A12ED121F6EBD7A000DEFBA /* LaunchScreen.storyboard in Resources */,
+				3A7770A41F81CB3A006D3F93 /* blog.xml in Resources */,
 				3A11A37C1F700D7D00777B47 /* HomePollTableViewCell.xib in Resources */,
 				3A11A3861F700DB900777B47 /* HomeBlogTableViewCell.xib in Resources */,
 				3A12ED0F1F6EBD7A000DEFBA /* Assets.xcassets in Resources */,
@@ -729,6 +744,7 @@
 				3A12ED751F6EBE05000DEFBA /* VideoViewController.m in Sources */,
 				3A12ED711F6EBE05000DEFBA /* SecondIntroductionViewController.m in Sources */,
 				3A12ED6E1F6EBE05000DEFBA /* ProfileViewController.m in Sources */,
+				3A77709E1F81BE63006D3F93 /* BHXMLParser.m in Sources */,
 				3A12ED6C1F6EBE05000DEFBA /* NavigationViewController.m in Sources */,
 				3A12ED6B1F6EBE05000DEFBA /* MessageViewController.m in Sources */,
 				3A12ED621F6EBE05000DEFBA /* BlogViewController.m in Sources */,
@@ -746,6 +762,7 @@
 				3A12ED6D1F6EBE05000DEFBA /* PollViewController.m in Sources */,
 				3A12ED041F6EBD7A000DEFBA /* main.m in Sources */,
 				3A12ED691F6EBE05000DEFBA /* LoginViewController.m in Sources */,
+				3AE5736F1F83D7E30039A408 /* BlogCommentTableViewCell.m in Sources */,
 				3A12ED641F6EBE05000DEFBA /* FindViewController.m in Sources */,
 				3A12ED701F6EBE05000DEFBA /* RootViewController.m in Sources */,
 				3A12ED651F6EBE05000DEFBA /* FirstIntroductionViewController.m in Sources */,
@@ -905,11 +922,15 @@
 			baseConfigurationReference = C483ACA1E826072EB64DE82A /* Pods-Beautyhaul.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E93236E44M;
 				INFOPLIST_FILE = Beautyhaul/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.beauty-haul.Beautyhaul";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beauty-haul.BeautyhaulDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -919,11 +940,15 @@
 			baseConfigurationReference = 68EA448700C5300C67108B6E /* Pods-Beautyhaul.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E93236E44M;
 				INFOPLIST_FILE = Beautyhaul/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.beauty-haul.Beautyhaul";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beauty-haul.BeautyhaulDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
