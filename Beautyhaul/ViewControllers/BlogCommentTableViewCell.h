@@ -10,4 +10,7 @@
 
 @interface BlogCommentTableViewCell : UITableViewCell
 @property (strong, nonatomic) NSDictionary *comment;
+
++ (CGFloat)widthForCommentAndReplies;
+
 @end

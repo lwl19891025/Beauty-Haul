@@ -101,8 +101,8 @@
         snapshot.alpha = 0.5;
     } completion:^(BOOL finished) {
         [snapshot removeFromSuperview];
-        [self setNeedsStatusBarAppearanceUpdate];
     }];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - privates
