@@ -12,6 +12,7 @@
 #import "BHXMLParser.h"
 #import "BlogCommentTableViewCell.h"
 #import "BlogLikesViewController.h"
+#import "ActionListView.h"
 
 @interface BlogLikesView : UIControl
 
@@ -369,7 +370,19 @@ static NSString *const cellReuseID = @"commentCell";
 }
 
 - (void)more:(id)sender{
-    
+    NSArray *actionInfos = @[@{@"actionName":@"Save",
+                               @"image":@"Save"},
+                             @{@"actionName":@"Edit",
+                               @"image":@"Edit"},
+                             @{@"actionName":@"Report",
+                               @"image":@"Report",
+                               @"textColor":[UIColor colorWithRed:0xFE/255. green:0x38/255. blue:0x24/255. alpha:1.]},
+                             @{@"actionName":@"Delete",
+                               @"image":@"Delete",
+                               @"textColor":[UIColor colorWithRed:0xFE/255. green:0x38/255. blue:0x24/255. alpha:1.]},
+                             ];
+    ActionListView *actionsView = [ActionListView viewWithActionInfos:actionInfos];
+    [actionsView show];
 }
 
 - (void)toggleLikeStatus:(UIButton *)button{
