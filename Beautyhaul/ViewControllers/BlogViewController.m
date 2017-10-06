@@ -11,8 +11,9 @@
 #import <YYText/NSAttributedString+YYText.h>
 #import "BHXMLParser.h"
 #import "BlogCommentTableViewCell.h"
+#import "BlogLikesViewController.h"
 
-@interface BlogLikesView : UIView
+@interface BlogLikesView : UIControl
 
 @property (strong, nonatomic) NSArray *likes;
 
@@ -358,6 +359,7 @@ static NSString *const cellReuseID = @"commentCell";
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - actions
 - (void)pop:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -372,6 +374,11 @@ static NSString *const cellReuseID = @"commentCell";
 
 - (void)toggleLikeStatus:(UIButton *)button{
     button.selected = !button.selected;
+}
+
+- (void)showAllLikes:(id)sender{
+    BlogLikesViewController *likesVC = [[BlogLikesViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:likesVC animated:YES];
 }
 
 #pragma mark - UITableViewDelegate and UITableViewDataSource
@@ -478,9 +485,11 @@ static NSString *const cellReuseID = @"commentCell";
 - (BlogLikesView *)likesView{
     if (!_likesView) {
         _likesView = [[BlogLikesView alloc] init];
+        [_likesView addTarget:self action:@selector(showAllLikes:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _likesView;
 }
+
 - (UIView *)commentCountView{
     if (!_commentCountView) {
         _commentCountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 59)];
