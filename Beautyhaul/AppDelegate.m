@@ -22,6 +22,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[RootViewController alloc] init];
     [self.window makeKeyAndVisible];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     return YES;
 }
 
@@ -49,6 +50,7 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

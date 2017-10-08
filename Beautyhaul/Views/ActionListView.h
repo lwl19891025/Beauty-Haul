@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class ActionListView;
+
+@protocol ActionListViewDelegate <NSObject>
+- (void)actionListView:(ActionListView *)view didSelectAtIndex:(NSInteger)index;
+@end
+
 @interface ActionListView : UIView
+@property (weak, nonatomic) id<ActionListViewDelegate> delegate;
+
 + (ActionListView *)viewWithActionInfos:(NSArray *)actionInfos;
 - (void)show;
+
 @end

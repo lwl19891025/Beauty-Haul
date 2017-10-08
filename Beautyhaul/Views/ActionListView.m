@@ -31,7 +31,7 @@ static NSString *const kActionCellReuseID = @"actionCell";
         self.backgroundColor = [UIColor clearColor];
         self.tableView.frame = CGRectMake(frame.size.width - kTableViewWidth - 10, 65, kTableViewWidth, 0);
         self.backgroundView = [[UIControl alloc] initWithFrame:frame];
-        [self.backgroundView addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
+        [self.backgroundView addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.backgroundView];
         [self addSubview:self.tableView];
     }
@@ -61,17 +61,23 @@ static NSString *const kActionCellReuseID = @"actionCell";
     [[UIApplication sharedApplication].keyWindow addSubview:self];
 }
 
-- (void)dismiss:(id)sender{
-    __weak typeof(self) weakSelf = self;
+- (void)hide:(id)sender{
+    [self dismiss:NULL];
+}
+
+- (void)dismiss:(void(^)(void))completionBlock{
     CGRect endFrame = self.tableView.frame;
     endFrame.size.height = 0;
     [UIView animateWithDuration:0.25 animations:^{
         self.backgroundColor = [UIColor clearColor];
         self.tableView.frame = endFrame;
     } completion:^(BOOL finished) {
-        __strong ActionListView *sself = weakSelf;
-        [sself removeFromSuperview];
+        [self removeFromSuperview];
     }];
+    
+    if (completionBlock){
+        completionBlock();
+    }
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -92,7 +98,13 @@ static NSString *const kActionCellReuseID = @"actionCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self dismiss:nil];
+    __weak typeof(self) wself = self;
+    [self dismiss:^{
+        __strong ActionListView *sself = wself;
+        if ([sself.delegate respondsToSelector:@selector(actionListView:didSelectAtIndex:)]) {
+            [sself.delegate actionListView:sself didSelectAtIndex:indexPath.row];
+        }
+    }];
 }
 
 #pragma mark - getters and setters

@@ -13,6 +13,7 @@
 #import "BlogCommentTableViewCell.h"
 #import "BlogLikesViewController.h"
 #import "ActionListView.h"
+#import "FlexibleTextView.h"
 
 @interface BlogLikesView : UIControl
 
@@ -21,7 +22,7 @@
 @end
 
 
-@interface BlogViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface BlogViewController ()<UITableViewDelegate, UITableViewDataSource, ActionListViewDelegate, UITextViewDelegate>
 @property (strong, nonatomic) UIImageView *avatorImageView;
 @property (strong, nonatomic) UIScrollView *contentView;
 @property (strong, nonatomic) UILabel *nameLabel;
@@ -33,7 +34,7 @@
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) UIButton *likeButton;
-@property (strong, nonatomic) UIView *commentView;
+@property (strong, nonatomic) FlexibleTextView *textView;
 
 @property (strong, nonatomic) NSArray *blogContent;
 @property (strong, nonatomic) NSArray *blogComments;
@@ -41,6 +42,8 @@
 @property (strong, nonatomic) NSURLSession *session;
 @property (strong, nonatomic) NSMutableArray *viewsForRichText;
 @property (assign, nonatomic) CGFloat heightForTableView;
+
+@property (strong, nonatomic) NSArray *actions;
 @end
 
 #define kScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
@@ -65,7 +68,7 @@ static NSString *const cellReuseID = @"commentCell";
     [self.contentView addSubview:self.commentCountView];
     [self.contentView addSubview:self.tableView];
     [self.view addSubview:self.likeButton];
-    [self.view addSubview:self.commentView];
+    [self.view addSubview:self.textView];
     
     self.timeLabel.text = @"Carol Rios";
     self.nameLabel.text = @"9:16 AM";
@@ -110,13 +113,229 @@ static NSString *const cellReuseID = @"commentCell";
     }];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.contentView.frame = self.view.bounds;
+    self.avatorImageView.frame = CGRectMake(20, 20, 50, 50);
+    self.nameLabel.frame = CGRectMake(CGRectGetMaxX(self.avatorImageView.frame)+10, 25, 200, 20);
+    self.clockImageView.frame = CGRectMake(CGRectGetMaxX(self.avatorImageView.frame)+10, 49, 16, 16);
+    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.clockImageView.frame)+5, 49, 200, 16);
+    self.richTextLabel.frame = (CGRect){0, 90, self.richTextLabel.textLayout.textBoundingSize};
+    self.likesView.frame = (CGRect){0, CGRectGetMaxY(self.richTextLabel.frame) + 20, kScreenWidth, 52};
+    self.commentCountView.frame = CGRectMake(0, CGRectGetMaxY(self.likesView.frame), kScreenWidth, 59);
+    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.commentCountView.frame), kScreenWidth, self.heightForTableView);
+    self.likeButton.frame = (CGRect){CGRectGetWidth(self.view.bounds)-70, CGRectGetHeight(self.view.bounds)-110, 50, 50};
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - actions
+- (void)pop:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)share:(id)sender{
+    
+}
+
+- (void)more:(id)sender{
+    if (!self.actions) {
+        self.actions = @[@{@"actionName":@"Save",
+                           @"image":@"Save"},
+                         @{@"actionName":@"Edit",
+                           @"image":@"Edit"},
+                         @{@"actionName":@"Report",
+                           @"image":@"Report",
+                           @"textColor":[UIColor colorWithRed:0xFE/255. green:0x38/255. blue:0x24/255. alpha:1.]},
+                         @{@"actionName":@"Delete",
+                           @"image":@"Delete",
+                           @"textColor":[UIColor colorWithRed:0xFE/255. green:0x38/255. blue:0x24/255. alpha:1.]},
+                         ];
+
+    }
+    ActionListView *actionsView = [ActionListView viewWithActionInfos:self.actions];
+    actionsView.delegate = self;
+    [actionsView show];
+}
+
+- (void)toggleLikeStatus:(UIButton *)button{
+    button.selected = !button.selected;
+}
+
+- (void)showAllLikes:(id)sender{
+    BlogLikesViewController *likesVC = [[BlogLikesViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:likesVC animated:YES];
+}
+
+#pragma mark - UITableViewDelegate and UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.blogComments.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    BlogCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseID forIndexPath:indexPath];
+    [cell setComment:self.blogComments[indexPath.row]];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height = [[self.blogComments[indexPath.row] objectForKey:@"height"] floatValue];
+    return height;
+}
+
+#pragma mark - ActionListViewDelegate
+- (void)actionListView:(ActionListView *)view didSelectAtIndex:(NSInteger)index{
+    switch (index) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            [self reportBlog];
+            break;
+        case 3:
+            [self deleteBlog];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - UITextViewDelegaet
+- (void)textViewDidChange:(UITextView *)textView{
+    static CGFloat maxHeight = 100;
+    static CGFloat minHeight = 44;
+    
+    CGFloat height = [self.textView heightThatFitsText];
+    CGFloat oldHeight = self.textView.bounds.size.height;
+    
+    if (height > maxHeight) {
+        textView.scrollEnabled = YES;
+    }
+    else if (height >= minHeight){
+        textView.scrollEnabled = NO;
+        if (height != oldHeight) {
+            CGRect textViewFrame = self.textView.frame;
+            textViewFrame.origin.y -= height - oldHeight;
+            textViewFrame.size.height += height - oldHeight;
+            [self.textView setFrame:textViewFrame];
+        }
+    } else {
+        CGRect textViewFrame = self.textView.frame;
+        textViewFrame.origin.y -= minHeight - oldHeight;
+        textViewFrame.size.height += minHeight - oldHeight;
+        [self.textView setFrame:textViewFrame];
+    }
+}
+
+#pragma mark - privates
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSUInteger options = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    
+    CGRect frame = [self.view convertRect:keyboardFrame fromView:[UIApplication sharedApplication].keyWindow];
+    CGRect endFrame = self.textView.frame;
+    endFrame.origin.y = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(frame) - CGRectGetHeight(endFrame);
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        self.textView.frame = endFrame;
+    } completion:NULL];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSUInteger options = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+
+    CGRect endFrame = self.textView.frame;
+    endFrame.origin.y = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(endFrame);
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        self.textView.frame = endFrame;
+    } completion:NULL];
+}
+
+- (void)setupNavigationItem{
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_button"] style:UIBarButtonItemStylePlain target:self action:@selector(pop:)];
+    [self.navigationItem setLeftBarButtonItem:leftItem];
+    
+    UIButton *shareButton = [[UIButton alloc] init];
+    [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *moreButton = [[UIButton alloc] init];
+    [moreButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(more:) forControlEvents:UIControlEventTouchUpInside];
+    [moreButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    [shareButton sizeToFit];
+    [moreButton sizeToFit];
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 44)];
+    [contentView addSubview:shareButton];
+    [contentView addSubview:moreButton];
+    shareButton.frame = CGRectMake(0, 0, 25, 44);
+    moreButton.frame = CGRectMake(25, 0, 25, 44);
+    
+    UIBarButtonItem *contentItem = [[UIBarButtonItem alloc] initWithCustomView:contentView];
+    
+    [self.navigationItem setRightBarButtonItem:contentItem];
+}
+
+- (void)reportBlog{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:@"Report"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 270, 60)];
+    contentView.backgroundColor = [UIColor redColor];
+    [alert addAction:cancelAction];
+    
+    [alert.view addSubview:contentView];
+    
+    [self presentViewController:alert animated:YES completion:NULL];
+}
+
+- (void)deleteBlog{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:@"are you sure you want to Report this note？"
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"Delete note" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alert addAction:comfirmAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:NULL];
+//    [self showViewController:alert sender:nil];
+}
+
 - (void)updateContentView{
     UIEdgeInsets insets = (UIEdgeInsets){0,20,0,20};
     __block NSMutableAttributedString *content = [[NSMutableAttributedString alloc] init];
     [self.blogContent enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj[@"element"] isEqualToString:@"title"]) {
             NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:obj[@"text"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:26],
-                                                                                                             NSForegroundColorAttributeName:[UIColor colorWithWhite:0.2 alpha:1.]}];
+                                                                                                                           NSForegroundColorAttributeName:[UIColor colorWithWhite:0.2 alpha:1.]}];
             NSRange range = NSMakeRange(0, title.length);
             NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
             style.headIndent = insets.left;
@@ -185,10 +404,10 @@ static NSString *const cellReuseID = @"commentCell";
                 productView.layer.shadowRadius = 13.;
                 
                 NSMutableAttributedString *productString = [NSMutableAttributedString yy_attachmentStringWithContent:productView
-                                                                                                 contentMode:UIViewContentModeCenter
-                                                                                              attachmentSize:size
-                                                                                                 alignToFont:[UIFont fontWithName:@"Helvetica" size:16]
-                                                                                                   alignment:YYTextVerticalAlignmentCenter];
+                                                                                                         contentMode:UIViewContentModeCenter
+                                                                                                      attachmentSize:size
+                                                                                                         alignToFont:[UIFont fontWithName:@"Helvetica" size:16]
+                                                                                                           alignment:YYTextVerticalAlignmentCenter];
                 NSRange range = NSMakeRange(0, productString.length);
                 NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
                 style.firstLineHeadIndent = insets.left;
@@ -204,10 +423,10 @@ static NSString *const cellReuseID = @"commentCell";
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:(CGRect){0, 0, width, height}];
                 imageView.image = [UIImage imageNamed:attributes[@"imageName"]];
                 NSMutableAttributedString *imageString = [NSMutableAttributedString yy_attachmentStringWithContent:imageView
-                                                                                                 contentMode:UIViewContentModeCenter
-                                                                                              attachmentSize:CGSizeMake(width, height)
-                                                                                                 alignToFont:[UIFont fontWithName:@"Helvetica" size:16]
-                                                                                                   alignment:YYTextVerticalAlignmentCenter];
+                                                                                                       contentMode:UIViewContentModeCenter
+                                                                                                    attachmentSize:CGSizeMake(width, height)
+                                                                                                       alignToFont:[UIFont fontWithName:@"Helvetica" size:16]
+                                                                                                         alignment:YYTextVerticalAlignmentCenter];
                 
                 NSRange range = NSMakeRange(0, imageString.length);
                 NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -222,10 +441,10 @@ static NSString *const cellReuseID = @"commentCell";
             separator.backgroundColor = [UIColor colorWithWhite:0xE6/255. alpha:1.];
             
             NSMutableAttributedString *separatorString = [NSMutableAttributedString yy_attachmentStringWithContent:separator
-                                                                                                   contentMode:UIViewContentModeCenter
-                                                                                                attachmentSize:size
-                                                                                                   alignToFont:[UIFont fontWithName:@"Helvetica" size:16]
-                                                                                                     alignment:YYTextVerticalAlignmentCenter];
+                                                                                                       contentMode:UIViewContentModeCenter
+                                                                                                    attachmentSize:size
+                                                                                                       alignToFont:[UIFont fontWithName:@"Helvetica" size:16]
+                                                                                                         alignment:YYTextVerticalAlignmentCenter];
             NSRange range = NSMakeRange(0, separatorString.length);
             NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
             style.headIndent = insets.left;
@@ -237,7 +456,7 @@ static NSString *const cellReuseID = @"commentCell";
         }
         else if ([obj[@"element"] isEqualToString:@"h4"]){
             NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:obj[@"text"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:20],
-                                                                                                                NSForegroundColorAttributeName:[UIColor colorWithWhite:0.2 alpha:1.]}];
+                                                                                                                              NSForegroundColorAttributeName:[UIColor colorWithWhite:0.2 alpha:1.]}];
             NSRange range = NSMakeRange(0, subtitle.length);
             NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
             style.headIndent = insets.left;
@@ -337,106 +556,6 @@ static NSString *const cellReuseID = @"commentCell";
     });
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    self.contentView.frame = self.view.bounds;
-    self.avatorImageView.frame = CGRectMake(20, 20, 50, 50);
-    self.nameLabel.frame = CGRectMake(CGRectGetMaxX(self.avatorImageView.frame)+10, 25, 200, 20);
-    self.clockImageView.frame = CGRectMake(CGRectGetMaxX(self.avatorImageView.frame)+10, 49, 16, 16);
-    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.clockImageView.frame)+5, 49, 200, 16);
-    self.richTextLabel.frame = (CGRect){0, 90, self.richTextLabel.textLayout.textBoundingSize};
-    self.likesView.frame = (CGRect){0, CGRectGetMaxY(self.richTextLabel.frame) + 20, kScreenWidth, 52};
-    self.commentCountView.frame = CGRectMake(0, CGRectGetMaxY(self.likesView.frame), kScreenWidth, 59);
-    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.commentCountView.frame), kScreenWidth, self.heightForTableView);
-    self.likeButton.frame = (CGRect){CGRectGetWidth(self.view.bounds)-70, CGRectGetHeight(self.view.bounds)-110, 50, 50};
-    self.commentView.frame = (CGRectMake(0, CGRectGetHeight(self.view.bounds)-49, CGRectGetWidth(self.view.bounds), 49));
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark - actions
-- (void)pop:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)share:(id)sender{
-    
-}
-
-- (void)more:(id)sender{
-    NSArray *actionInfos = @[@{@"actionName":@"Save",
-                               @"image":@"Save"},
-                             @{@"actionName":@"Edit",
-                               @"image":@"Edit"},
-                             @{@"actionName":@"Report",
-                               @"image":@"Report",
-                               @"textColor":[UIColor colorWithRed:0xFE/255. green:0x38/255. blue:0x24/255. alpha:1.]},
-                             @{@"actionName":@"Delete",
-                               @"image":@"Delete",
-                               @"textColor":[UIColor colorWithRed:0xFE/255. green:0x38/255. blue:0x24/255. alpha:1.]},
-                             ];
-    ActionListView *actionsView = [ActionListView viewWithActionInfos:actionInfos];
-    [actionsView show];
-}
-
-- (void)toggleLikeStatus:(UIButton *)button{
-    button.selected = !button.selected;
-}
-
-- (void)showAllLikes:(id)sender{
-    BlogLikesViewController *likesVC = [[BlogLikesViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:likesVC animated:YES];
-}
-
-#pragma mark - UITableViewDelegate and UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.blogComments.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    BlogCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseID forIndexPath:indexPath];
-    [cell setComment:self.blogComments[indexPath.row]];
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat height = [[self.blogComments[indexPath.row] objectForKey:@"height"] floatValue];
-    return height;
-}
-
-#pragma mark - privates
-- (void)setupNavigationItem{
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_button"] style:UIBarButtonItemStylePlain target:self action:@selector(pop:)];
-    [self.navigationItem setLeftBarButtonItem:leftItem];
-    
-    UIButton *shareButton = [[UIButton alloc] init];
-    [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *moreButton = [[UIButton alloc] init];
-    [moreButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(more:) forControlEvents:UIControlEventTouchUpInside];
-    [moreButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    [shareButton sizeToFit];
-    [moreButton sizeToFit];
-    
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 44)];
-    [contentView addSubview:shareButton];
-    [contentView addSubview:moreButton];
-    shareButton.frame = CGRectMake(0, 0, 25, 44);
-    moreButton.frame = CGRectMake(25, 0, 25, 44);
-    
-    UIBarButtonItem *contentItem = [[UIBarButtonItem alloc] initWithCustomView:contentView];
-    
-    [self.navigationItem setRightBarButtonItem:contentItem];
-}
 #pragma mark - getters and setters
 
 - (UIScrollView *)contentView{
@@ -550,27 +669,31 @@ static NSString *const cellReuseID = @"commentCell";
     return _likeButton;
 }
 
-- (UIView *)commentView{
-    if (!_commentView) {
-        _commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 49)];
-        _commentView.backgroundColor = [UIColor whiteColor];
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 49)];
-    
-        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 49)];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"addcomment"]];
-        imageView.frame = CGRectMake(20, 14.5, 20, 20);
-        [leftView addSubview:imageView];
-        textField.leftView = leftView;
-        textField.leftViewMode = UITextFieldViewModeAlways;
-        [_commentView addSubview:textField];
-        textField.placeholder = @"Add a comment";
+- (FlexibleTextView *)textView{
+    if (!_textView) {
+        _textView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([FlexibleTextView class]) owner:nil options:nil] firstObject];
+        _textView.frame = (CGRectMake(0, CGRectGetHeight(self.view.bounds)-44, CGRectGetWidth(self.view.bounds), 44));
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.font = [UIFont systemFontOfSize:16.];
+        _textView.textColor = [UIColor colorWithWhite:0.2 alpha:1.];
+        _textView.delegate = self;
+        _textView.placeholder = @"Add a comment";
         
+        UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        [sendButton setImage:[UIImage imageNamed:@"send"] forState:UIControlStateNormal];
+
+        UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        [leftButton setImage:[UIImage imageNamed:@"addcomment"] forState:UIControlStateNormal];
+        
+        [_textView setLeftView:leftButton];
+        [_textView setRightView:sendButton];
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, .5)];
         separator.backgroundColor = [UIColor colorWithWhite:0xE6/255. alpha:1.];
-        [_commentView addSubview:separator];
+        [_textView addSubview:separator];
     }
-    return _commentView;
+    return _textView;
 }
+
 @end
 
 @implementation BlogLikesView{
