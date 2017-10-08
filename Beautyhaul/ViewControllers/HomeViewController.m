@@ -42,7 +42,7 @@ static NSString *const kQACellReuseIdentifier = @"q&aCellReuseIdentifier";
     self.title = @"Home";
     [self generateDataSource];
     [self.view addSubview:self.tableView];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     UINib *pollCell = [UINib nibWithNibName:NSStringFromClass([HomePollTableViewCell class]) bundle:nil];
     [self.tableView registerNib:pollCell forCellReuseIdentifier:kPollCellReuseIdentifier];
     
@@ -54,14 +54,12 @@ static NSString *const kQACellReuseIdentifier = @"q&aCellReuseIdentifier";
     
     UINib *qaCell = [UINib nibWithNibName:NSStringFromClass([HomeQATableViewCell class]) bundle:nil];
     [self.tableView registerNib:qaCell forCellReuseIdentifier:kQACellReuseIdentifier];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     self.tableView.frame = self.view.bounds;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset =  UIEdgeInsetsMake(self.topLayoutGuide.length, 0, self.bottomLayoutGuide.length, 0);
-    self.tableView.contentOffset = CGPointMake(0, -self.topLayoutGuide.length);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -156,6 +154,7 @@ static NSString *const kQACellReuseIdentifier = @"q&aCellReuseIdentifier";
         _tableView.backgroundColor = [UIColor colorWithRed:244./255 green:244./255 blue:248./255 alpha:1.];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+//        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
     }
     return _tableView;
 }

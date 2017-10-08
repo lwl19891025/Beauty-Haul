@@ -84,7 +84,7 @@ static CGSize buttonSize = (CGSize){20, 20};
         _commentLabel = [[UILabel alloc] init];
         _commentLabel.numberOfLines = 0;
         _commentLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.];
-        _commentLabel.font = [UIFont fontWithName:@"PingFangSC" size:14.];
+        _commentLabel.font = [UIFont fontWithName:@"PingFang SC" size:14.];
     }
     return _commentLabel;
 }

@@ -11,6 +11,7 @@
 @interface VideoViewController ()<UIScrollViewDelegate>
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIScrollView *scrollView;
+
 @end
 
 @implementation VideoViewController
@@ -30,10 +31,36 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     self.scrollView.frame = self.view.bounds;
     self.imageView.frame = self.view.bounds;
+}
+- (BOOL)shouldAutorotate{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (void)deviceOrientationDidChange:(NSNotification *)notification{
+    [UIViewController attemptRotationToDeviceOrientation];
+    NSLog(@"%@", [notification.userInfo description]);
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
 }
 
 - (void)setImage:(UIImage *)image{
