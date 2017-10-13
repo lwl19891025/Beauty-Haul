@@ -35,18 +35,21 @@
 }
 
 - (void)start{
-    [self.parser parse];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+         [self.parser parse];
+    });
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser{
-    NSLog(@"start......\n");
+
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
-    NSLog(@"end......\n");
-    if (self.completion) {
-        self.completion(self.contents);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.completion) {
+            self.completion(self.contents);
+        }
+    });
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict{
@@ -78,9 +81,11 @@
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
-    if (self.completion) {
-        self.completion(nil);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.completion) {
+            self.completion(nil);
+        }
+    });
 }
 
 @end

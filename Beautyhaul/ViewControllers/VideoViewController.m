@@ -11,7 +11,7 @@
 @interface VideoViewController ()<UIScrollViewDelegate>
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIScrollView *scrollView;
-
+//@property (strong, nonatomic) 
 @end
 
 @implementation VideoViewController
