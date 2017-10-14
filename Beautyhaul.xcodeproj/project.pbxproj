@@ -55,6 +55,7 @@
 		3A77709E1F81BE63006D3F93 /* BHXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A77709D1F81BE63006D3F93 /* BHXMLParser.m */; };
 		3A7770A41F81CB3A006D3F93 /* blog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A7770A31F81CB3A006D3F93 /* blog.xml */; };
 		3A8133ED1F921146007F6C0B /* BlogContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8133EC1F921146007F6C0B /* BlogContentViewController.m */; };
+		3A8133F61F9250A4007F6C0B /* PageMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8133F51F9250A4007F6C0B /* PageMenuView.m */; };
 		3A8320BB1F8750C4001340E2 /* BlogLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8320BA1F8750C4001340E2 /* BlogLikesViewController.m */; };
 		3A8320BE1F875B30001340E2 /* ActionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8320BD1F875B30001340E2 /* ActionListView.m */; };
 		3ABAAD4E1F73F4E00009953C /* BlogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */; };
@@ -172,6 +173,8 @@
 		3A7770A31F81CB3A006D3F93 /* blog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blog.xml; sourceTree = "<group>"; };
 		3A8133EB1F921146007F6C0B /* BlogContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogContentViewController.h; sourceTree = "<group>"; };
 		3A8133EC1F921146007F6C0B /* BlogContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogContentViewController.m; sourceTree = "<group>"; };
+		3A8133F41F9250A4007F6C0B /* PageMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageMenuView.h; sourceTree = "<group>"; };
+		3A8133F51F9250A4007F6C0B /* PageMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageMenuView.m; sourceTree = "<group>"; };
 		3A8320B91F8750C4001340E2 /* BlogLikesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogLikesViewController.h; sourceTree = "<group>"; };
 		3A8320BA1F8750C4001340E2 /* BlogLikesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogLikesViewController.m; sourceTree = "<group>"; };
 		3A8320BC1F875B30001340E2 /* ActionListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionListView.h; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 				3A001AC71F8BAFEA00C715E5 /* AVPlayerView.m */,
 				3A5D21A21F90E2F800325935 /* ProductView.h */,
 				3A5D21A31F90E2F800325935 /* ProductView.m */,
+				3A8133F41F9250A4007F6C0B /* PageMenuView.h */,
+				3A8133F51F9250A4007F6C0B /* PageMenuView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -818,6 +823,7 @@
 				3A12ED701F6EBE05000DEFBA /* RootViewController.m in Sources */,
 				3A12ED651F6EBE05000DEFBA /* FirstIntroductionViewController.m in Sources */,
 				3A12ED741F6EBE05000DEFBA /* ThirdIntroductionViewController.m in Sources */,
+				3A8133F61F9250A4007F6C0B /* PageMenuView.m in Sources */,
 				3A12ED6F1F6EBE05000DEFBA /* QAViewController.m in Sources */,
 				3A12ED681F6EBE05000DEFBA /* LaunchViewController.m in Sources */,
 				3A30995E1F8881A900AB734A /* RepliesViewController.m in Sources */,
