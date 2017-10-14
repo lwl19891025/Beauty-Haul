@@ -10,7 +10,7 @@
 
 @interface CommentPreviewController : UIViewController
 @property (assign, nonatomic) NSInteger maxCountToDisplay;
-@property (assign, nonatomic) BOOL srollEnabled;
+@property (assign, nonatomic) BOOL scrollEnabled;
 @property (weak, nonatomic, readwrite) UIView *customHeadrView;
 @property (strong, nonatomic) NSArray *comments;
 - (CGFloat)heightForFit;

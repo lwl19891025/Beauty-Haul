@@ -7,42 +7,23 @@
 //
 
 #import "BlogViewController.h"
-#import <YYText.h>
-#import "BHXMLParser.h"
-#import "BlogLikesViewController.h"
 #import "ActionListView.h"
 #import "FlexibleTextView.h"
 #import "CommentPreviewController.h"
-#import "ProductView.h"
-
-@interface BlogLikesView : UIControl
-
-@property (strong, nonatomic) NSArray *likes;
-
-@end
-
-
-@interface BlogViewController ()<ActionListViewDelegate, UITextViewDelegate>
-@property (strong, nonatomic) UIImageView *avatorImageView;
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) UIImageView *clockImageView;
-@property (strong, nonatomic) UILabel *timeLabel;
-@property (strong, nonatomic) YYLabel *richTextLabel;
-@property (strong, nonatomic) BlogLikesView *likesView;
-@property (strong, nonatomic) UIButton *likeButton;
-@property (strong, nonatomic) FlexibleTextView *textView;
-
-@property (strong, nonatomic) NSArray *blogContent;
-@property (strong, nonatomic) NSArray *blogComments;
-
-@property (strong, nonatomic) NSArray *actions;
-@property (weak, nonatomic) CommentPreviewController *commentPreviewVC;
-@end
+#import "BlogContentViewController.h"
 
 #define kScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
 
-static NSString *const cellReuseID = @"commentCell";
+@interface BlogViewController ()<ActionListViewDelegate, UITextViewDelegate>
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIButton *likeButton;
+@property (strong, nonatomic) FlexibleTextView *textView;
+
+@property (strong, nonatomic) NSArray *actions;
+@property (weak, nonatomic) CommentPreviewController *commentViewController;
+@property (weak, nonatomic) BlogContentViewController *contentViewController;
+@end
+
 
 @implementation BlogViewController
 
@@ -54,61 +35,48 @@ static NSString *const cellReuseID = @"commentCell";
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.likeButton];
     [self.view addSubview:self.textView];
+    BlogContentViewController *blogContentVC = [BlogContentViewController new];
+    [blogContentVC willMoveToParentViewController:self];
+    [self.scrollView addSubview:blogContentVC.view];
+    [self addChildViewController:blogContentVC];
+    self.contentViewController = blogContentVC;
     
-    [self.scrollView addSubview:self.avatorImageView];
-    [self.scrollView addSubview:self.nameLabel];
-    [self.scrollView addSubview:self.clockImageView];
-    [self.scrollView addSubview:self.timeLabel];
-    [self.scrollView addSubview:self.richTextLabel];
     CommentPreviewController *previewVC = [CommentPreviewController new];
+    previewVC.scrollEnabled = NO;
     [previewVC willMoveToParentViewController:self];
     [self.scrollView addSubview:previewVC.view];
     [self addChildViewController:previewVC];
-    self.commentPreviewVC = previewVC;
-    [self.scrollView addSubview:self.likesView];
-    
-    self.timeLabel.text = @"9:16 AM";
-    self.nameLabel.text = @"Carol Rios";
+    self.commentViewController = previewVC;
     [self generateMockData];
-    previewVC.comments = self.blogComments;
 }
 
 - (void)generateMockData{
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"blog.xml" ofType:nil];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
     
-    self.blogComments = @[@{@"name":@"Haperion",
-                            @"avator":@"Haperion",
-                            @"comment":@"Well… NaugtyDog is a North American company,so if isn’t worldwide, why would you be surprised? They can’t tweet to NA people only.",
-                            @"replies":@[@{@"author":@"Lisa",
-                                           @"content":@"They have fans of the game all across the world."},
-                                         @{@"author":@"Haperion",
-                                           @"replyTo":@"Lisa",
-                                           @"content":@"They have fans of the game all across the world."},
-                                         @{@"author":@"Lisa",
-                                           @"content":@""}]
-                            },
-                          @{@"name":@"La Galerie Design",
-                            @"avator":@"La Galerie Design",
-                            @"comment":@"Enfin…",
-                            @"replies":@[@{@"author":@"Andrea Navarro",
-                                           @"content":@"They have fans of the game all across the world."}]
-                            },
-                          @{@"name":@"Andrea Navarro",
-                            @"avator":@"Andrea Navarro",
-                            @"comment":@"Marine Vacth,wow,again one of my favactr..Yayy! Beautyyy,best news ever for me!! Omg!!!!💗",
-                            },
-                          @{@"name":@"ttya",
-                            @"avator":@"ttya",
-                            @"comment":@"Is the strobe lighting to detract us form the prict tag?💶",
-                            }];
-    
-    __weak typeof(self) weakSelf = self;
-    [BHXMLParser parseContentsOfURL:fileURL completion:^(NSArray *result) {
-        __strong BlogViewController *strongSelf = weakSelf;
-        strongSelf.blogContent = result;
-        [strongSelf updateContentView];
-    }];
+    NSArray *blogComments = @[@{@"name":@"Haperion",
+                                @"avator":@"Haperion",
+                                @"comment":@"Well… NaugtyDog is a North American company,so if isn’t worldwide, why would you be surprised? They can’t tweet to NA people only.",
+                                @"replies":@[@{@"author":@"Lisa",
+                                               @"content":@"They have fans of the game all across the world."},
+                                             @{@"author":@"Haperion",
+                                               @"replyTo":@"Lisa",
+                                               @"content":@"They have fans of the game all across the world."},
+                                             @{@"author":@"Lisa",
+                                               @"content":@""}]},
+                              @{@"name":@"La Galerie Design",
+                                @"avator":@"La Galerie Design",
+                                @"comment":@"Enfin…",
+                                @"replies":@[@{@"author":@"Andrea Navarro",
+                                               @"content":@"They have fans of the game all across the world."}]},
+                              @{@"name":@"Andrea Navarro",
+                                @"avator":@"Andrea Navarro",
+                                @"comment":@"Marine Vacth,wow,again one of my favactr..Yayy! Beautyyy,best news ever for me!! Omg!!!!💗"},
+                              @{@"name":@"ttya",
+                                @"avator":@"ttya",
+                                @"comment":@"Is the strobe lighting to detract us form the prict tag?💶"}];
+    self.contentViewController.blogURL = fileURL;
+    self.commentViewController.comments = blogComments;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -126,17 +94,12 @@ static NSString *const cellReuseID = @"commentCell";
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     self.scrollView.frame = self.view.bounds;
-    self.avatorImageView.frame = CGRectMake(20, 20, 50, 50);
-    self.nameLabel.frame = CGRectMake(CGRectGetMaxX(self.avatorImageView.frame)+10, 25, 200, 20);
-    self.clockImageView.frame = CGRectMake(CGRectGetMaxX(self.avatorImageView.frame)+10, 49, 16, 16);
-    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.clockImageView.frame)+5, 49, 200, 16);
-    CGSize textSize = self.richTextLabel.textLayout.textBoundingSize;
-    self.richTextLabel.frame = (CGRect){20, 90, textSize};
-    self.likesView.frame = (CGRect){0, CGRectGetMaxY(self.richTextLabel.frame) + 20, kScreenWidth, 52};
-    CGFloat height = [self.commentPreviewVC heightForFit];
-    self.commentPreviewVC.view.frame = CGRectMake(0, CGRectGetMaxY(self.likesView.frame), kScreenWidth, height);
+    CGFloat contentHeight = [self.contentViewController heightForFit];
+    self.contentViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), contentHeight);
+    CGFloat commentHeight = [self.commentViewController heightForFit];
+    self.commentViewController.view.frame = CGRectMake(0, contentHeight + 20, CGRectGetWidth(self.view.bounds), commentHeight);
     self.likeButton.frame = (CGRect){CGRectGetWidth(self.view.bounds)-70, CGRectGetHeight(self.view.bounds)-110, 50, 50};
-    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMaxY(self.commentPreviewVC.view.frame));
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMaxY(self.commentViewController.view.frame));
 }
 
 - (void)didReceiveMemoryWarning {
@@ -174,11 +137,6 @@ static NSString *const cellReuseID = @"commentCell";
 
 - (void)toggleLikeStatus:(UIButton *)button{
     button.selected = !button.selected;
-}
-
-- (void)showAllLikes:(id)sender{
-    BlogLikesViewController *likesVC = [[BlogLikesViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:likesVC animated:YES];
 }
 
 #pragma mark - ActionListViewDelegate
@@ -312,85 +270,8 @@ static NSString *const cellReuseID = @"commentCell";
 }
 
 - (void)updateContentView{
-    UIEdgeInsets insets = (UIEdgeInsets){0,20,0,20};
-    __block NSMutableAttributedString *content = [[NSMutableAttributedString alloc] init];
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.lineSpacing = 5;
-    style.paragraphSpacing = 20;
-    
-    UIColor *textColor = [UIColor colorWithWhite:0.2 alpha:1.];
-    
-    UIFont *titleFont = [UIFont systemFontOfSize:26.];
-    UIFont *contentFont = [UIFont systemFontOfSize:16.];
-    UIFont *subtitleFont = [UIFont systemFontOfSize:20.];
-    CGFloat labelWidth = CGRectGetWidth([UIScreen mainScreen].bounds) - insets.left - insets.right;
-    
-    NSDictionary *titleAttrs = @{NSFontAttributeName:titleFont, NSForegroundColorAttributeName:textColor};
-    NSDictionary *contentAttrs = @{NSFontAttributeName:contentFont, NSForegroundColorAttributeName:textColor};
-    NSDictionary *subtitleAttr = @{NSFontAttributeName:subtitleFont, NSForegroundColorAttributeName:textColor};
-    
-    [self.blogContent enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj[@"element"] isEqualToString:@"title"]) {
-            NSAttributedString *title = [[NSAttributedString alloc] initWithString:obj[@"text"] attributes:titleAttrs];
-            [content appendAttributedString:title];
-        }
-        else if ([obj[@"element"] isEqualToString:@"p"]){
-            NSAttributedString *paragraph = [[NSAttributedString alloc] initWithString:obj[@"text"] attributes:contentAttrs];
-            [content appendAttributedString:paragraph];
-        }
-        else if ([obj[@"element"] isEqualToString:@"image"]){
-            NSDictionary *attributes = obj[@"attributes"];
-            if ([attributes[@"type"] isEqualToString:@"product"]) {
-                CGSize size = (CGSize){labelWidth, 80};
-                ProductView *view = [[ProductView alloc] initWithFrame:(CGRect){0, 0, size}];
-                view.imageView.image = [UIImage imageNamed:attributes[@"imageName"]];
-                view.brandLabel.text = attributes[@"brand"];
-                view.nameLabel.text = attributes[@"name"];
-                NSAttributedString *productString = [NSAttributedString yy_attachmentStringWithContent:view
-                                                                                           contentMode:UIViewContentModeCenter
-                                                                                        attachmentSize:size
-                                                                                           alignToFont:contentFont
-                                                                                             alignment:YYTextVerticalAlignmentCenter];
-                [content appendAttributedString:productString];
-            }
-            else {
-                CGFloat height = labelWidth/[attributes[@"aspectRatio"] floatValue];
-                CGSize size = CGSizeMake(labelWidth, height);
-                UIImageView *imageView = [[UIImageView alloc] initWithFrame:(CGRect){0, 0, size}];
-                imageView.layer.cornerRadius = 8.;
-                imageView.layer.masksToBounds = YES;
-                imageView.image = [UIImage imageNamed:attributes[@"imageName"]];
-                NSAttributedString *imageString = [NSAttributedString yy_attachmentStringWithContent:imageView
-                                                                                         contentMode:UIViewContentModeCenter
-                                                                                      attachmentSize:size
-                                                                                         alignToFont:contentFont
-                                                                                           alignment:YYTextVerticalAlignmentCenter];
-                [content appendAttributedString:imageString];
-            }
-        }
-        else if ([obj[@"element"] isEqualToString:@"br"]){
-            CGSize size = (CGSize){labelWidth, .5};
-            UIView *separator = [[UIView alloc] initWithFrame:(CGRect){0, 0, size}];
-            separator.backgroundColor = [UIColor colorWithWhite:0xE6/255. alpha:1.];
-            NSAttributedString *separatorString = [NSAttributedString yy_attachmentStringWithContent:separator
-                                                                                         contentMode:UIViewContentModeCenter
-                                                                                      attachmentSize:size
-                                                                                         alignToFont:contentFont
-                                                                                           alignment:YYTextVerticalAlignmentCenter];
-            [content appendAttributedString:separatorString];
-        }
-        else if ([obj[@"element"] isEqualToString:@"h4"]){
-            NSAttributedString *subtitle = [[NSAttributedString alloc] initWithString:obj[@"text"] attributes:subtitleAttr];
-            [content appendAttributedString:subtitle];
-        }
-        [content appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:nil]];
-    }];
-    
-    [content yy_setParagraphStyle:style range:NSMakeRange(0, content.length)];
-    CGSize size = CGSizeMake(labelWidth, CGFLOAT_MAX);
-    YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:size text:content];
-    self.richTextLabel.textLayout = layout;
-    self.scrollView.contentSize = CGSizeMake(kScreenWidth, layout.textBoundingSize.height + 90 + 20 + 52 + 59 + 1000);
+
+//    self.scrollView.contentSize = CGSizeMake(kScreenWidth, layout.textBoundingSize.height + 90 + 20 + 52 + 59 + 1000);
     [self.view setNeedsLayout];
     [self.view layoutIfNeeded];
 }
@@ -399,6 +280,7 @@ static NSString *const cellReuseID = @"commentCell";
 - (UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
+        _scrollView.backgroundColor = [UIColor colorWithWhite:248./255 alpha:1.];
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         UIEdgeInsets insets = _scrollView.contentInset;
@@ -407,57 +289,6 @@ static NSString *const cellReuseID = @"commentCell";
         _scrollView.contentInset = insets;
     }
     return _scrollView;
-}
-
-- (UIImageView *)avatorImageView{
-    if (!_avatorImageView) {
-        _avatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avator_blog"]];
-    }
-    return _avatorImageView;
-}
-
-- (UILabel *)nameLabel{
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc] init];
-        _nameLabel.textColor = [UIColor colorWithRed:154/255. green:142/255. blue:243/255. alpha:1.];
-        _nameLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
-    }
-    return _nameLabel;
-}
-
-- (UIImageView *)clockImageView{
-    if (!_clockImageView) {
-        _clockImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"clock"]];
-    }
-    return _clockImageView;
-}
-
-- (UILabel *)timeLabel{
-    if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] init];
-        _timeLabel.textColor = [UIColor colorWithWhite:0.6 alpha:1.];
-        _timeLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
-    }
-    return _timeLabel;
-}
-
-- (YYLabel *)richTextLabel{
-    if (!_richTextLabel) {
-        _richTextLabel = [YYLabel new];
-        _richTextLabel.displaysAsynchronously = YES;
-        _richTextLabel.userInteractionEnabled = YES;
-        _richTextLabel.numberOfLines = 0;
-        _richTextLabel.textVerticalAlignment = YYTextVerticalAlignmentTop;
-    }
-    return _richTextLabel;
-}
-
-- (BlogLikesView *)likesView{
-    if (!_likesView) {
-        _likesView = [[BlogLikesView alloc] init];
-        [_likesView addTarget:self action:@selector(showAllLikes:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _likesView;
 }
 
 - (UIButton *)likeButton{
@@ -499,39 +330,3 @@ static NSString *const cellReuseID = @"commentCell";
 }
 
 @end
-
-@implementation BlogLikesView{
-    UIView *_topSeparator;
-    UIImageView *_imageView;
-    UIView *_bottomSeparator;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"followers"]];
-        [self addSubview:_imageView];
-        
-        _topSeparator = [[UIView alloc] init];
-        _topSeparator.backgroundColor = [UIColor colorWithWhite:0xE6/255. alpha:1.];
-        [self addSubview:_topSeparator];
-        
-        _bottomSeparator = [[UIView alloc] init];
-        _bottomSeparator.backgroundColor = [UIColor colorWithWhite:0xE6/255. alpha:1.];
-        [self addSubview:_bottomSeparator];
-    }
-    return self;
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    _topSeparator.frame = CGRectMake(20, 0, CGRectGetWidth(self.bounds), .5);
-    _imageView.frame = (CGRect){20 ,14, 219.5, 24};
-    _bottomSeparator.frame = CGRectMake(0, CGRectGetHeight(self.bounds)-.5, CGRectGetWidth(self.bounds), .5);
-}
-
-- (void)setLikes:(NSArray *)likes{
-    _likes = likes;
-}
-
-@end
-

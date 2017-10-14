@@ -25,7 +25,7 @@
 @property (strong, nonatomic) YYLabel *replyLabel;
 @end
 
-@interface CommentPreviewTableHeaderView : UIView
+@interface CommentPreviewHeaderView : UIView
 @property (strong, nonatomic) UILabel *textLabel;
 @end
 
@@ -33,7 +33,7 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *layouts;
 @property (assign, nonatomic) CGFloat height;
-@property (strong, nonatomic) CommentPreviewTableHeaderView *tableHeaderView;
+@property (strong, nonatomic) CommentPreviewHeaderView *headerView;
 @end
 
 
@@ -47,11 +47,19 @@ static CGSize kAvatorImageSize = (CGSize){50, 50};
 static CGFloat marginLeftRight = 20.;
 
 @implementation CommentPreviewController
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        _scrollEnabled = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.headerView];
     [self.view addSubview:self.tableView];
-    self.tableView.tableHeaderView = self.tableHeaderView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,8 +68,11 @@ static CGFloat marginLeftRight = 20.;
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    self.tableView.frame = self.view.bounds;
-    self.tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 44);
+    self.headerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 44);
+    CGRect frame = self.view.bounds;
+    frame.origin.y = 44;
+    frame.size.height -= 44;
+    self.tableView.frame = frame;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
@@ -69,7 +80,7 @@ static CGFloat marginLeftRight = 20.;
 }
 
 - (CGFloat)heightForFit{
-    return self.tableView.contentSize.height;
+    return self.tableView.contentSize.height + 44;
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -129,12 +140,14 @@ static CGFloat marginLeftRight = 20.;
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.scrollEnabled = _scrollEnabled;
         [_tableView registerClass:[CommentPreviewTableViewCell class] forCellReuseIdentifier:kCommentPreviewCellReuseId];
         [_tableView registerClass:[CommentPreviewSectionHeader class] forHeaderFooterViewReuseIdentifier:kCommentPreviewSectionHeaderReuseId];
         [_tableView registerClass:[CommentPreviewSectionFooter class] forHeaderFooterViewReuseIdentifier:kCommentPreviewSectionFooterReuseId];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
             _tableView.estimatedRowHeight = 23;
             _tableView.estimatedSectionHeaderHeight = 50;
         }
@@ -142,16 +155,16 @@ static CGFloat marginLeftRight = 20.;
     return _tableView;
 }
 
-- (CommentPreviewTableHeaderView *)tableHeaderView{
-    if (!_tableHeaderView) {
-        _tableHeaderView = [[CommentPreviewTableHeaderView alloc] init];
+- (CommentPreviewHeaderView *)headerView{
+    if (!_headerView) {
+        _headerView = [[CommentPreviewHeaderView alloc] init];
     }
-    return _tableHeaderView;
+    return _headerView;
 }
 
-- (void)setSrollEnabled:(BOOL)srollEnabled{
-    _srollEnabled = srollEnabled;
-    self.tableView.scrollEnabled = srollEnabled;
+- (void)setScrollEnabled:(BOOL)scrollEnabled{
+    _scrollEnabled = scrollEnabled;
+    _tableView.scrollEnabled = scrollEnabled;
 }
 
 - (void)setMaxCountToDisplay:(NSInteger)maxCountToDisplay{
@@ -203,8 +216,10 @@ static CGFloat marginLeftRight = 20.;
         }];
         self.layouts = layouts;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.tableHeaderView.textLabel.text = [NSString stringWithFormat:@"%@ Comments", @(self.comments.count)];
+            self.headerView.textLabel.text = [NSString stringWithFormat:@"%@ Comments", @(self.comments.count)];
             [self.tableView reloadData];
+            [self.view setNeedsLayout];
+            [self.view layoutIfNeeded];
         });
     });
 }
@@ -214,7 +229,7 @@ static CGFloat marginLeftRight = 20.;
 
 
 #pragma mark - Table Header View Implementation
-@implementation CommentPreviewTableHeaderView{
+@implementation CommentPreviewHeaderView{
     __weak UIImageView *_imageView;
     __weak UIView *_separator;
 }
@@ -250,8 +265,6 @@ static CGFloat marginLeftRight = 20.;
     return _textLabel;
 }
 @end
-
-
 
 
 #pragma mark - Section Header Implementation
