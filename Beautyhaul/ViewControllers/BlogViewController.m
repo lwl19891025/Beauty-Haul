@@ -270,8 +270,6 @@
 }
 
 - (void)updateContentView{
-
-//    self.scrollView.contentSize = CGSizeMake(kScreenWidth, layout.textBoundingSize.height + 90 + 20 + 52 + 59 + 1000);
     [self.view setNeedsLayout];
     [self.view layoutIfNeeded];
 }
@@ -322,9 +320,6 @@
         
         [_textView setLeftView:leftButton];
         [_textView setRightView:sendButton];
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, .5)];
-        separator.backgroundColor = [UIColor colorWithWhite:0xE6/255. alpha:1.];
-        [_textView addSubview:separator];
     }
     return _textView;
 }

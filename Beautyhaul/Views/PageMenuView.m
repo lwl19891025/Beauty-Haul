@@ -45,7 +45,16 @@
 
 - (void)buttonClick:(UIButton *)button{
     [self.menuButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.selected = (obj == button);
+        if (obj == button) {
+            obj.selected = YES;
+            _selectedIndex = idx;
+            if ([self.delegate respondsToSelector:@selector(pageMenuView:didSelectedAtIndex:)]) {
+                [self.delegate pageMenuView:self didSelectedAtIndex:idx];
+            }
+        }
+        else {
+            obj.selected = NO;
+        }
     }];
     NSInteger index = [self.menuButtons indexOfObject:button];
     CGRect frame = self.selectedIndicator.frame;
@@ -79,6 +88,13 @@
     }];
     self.menuButtons = buttons;
     [self.menuButtons.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex{
+    if (selectedIndex < self.menuButtons.count && selectedIndex >= 0) {
+        _selectedIndex = selectedIndex;
+        [self.menuButtons[selectedIndex] sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 @end

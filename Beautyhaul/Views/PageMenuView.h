@@ -11,9 +11,11 @@
 @class PageMenuView;
 
 @protocol PageMenuViewDelegate<NSObject>
-
+- (void)pageMenuView:(PageMenuView *)menuView didSelectedAtIndex:(NSInteger)index;
 @end
 
 @interface PageMenuView : UIView
 @property (strong, nonatomic) NSArray<NSString *> *menus;
+@property (assign, nonatomic) NSInteger selectedIndex;
+@property (weak, nonatomic) id<PageMenuViewDelegate> delegate;
 @end

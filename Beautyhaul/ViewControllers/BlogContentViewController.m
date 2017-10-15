@@ -26,6 +26,7 @@
 @interface BlogContentViewController ()
 @property (strong, nonatomic) AuthorInfoView *authorInfoView;
 @property (strong, nonatomic) YYLabel *contentLabel;
+@property (strong, nonatomic) UIButton *moreButton;
 @property (strong, nonatomic) BlogLikesView *likesView;
 @end
 
@@ -33,13 +34,18 @@ CGFloat kAuthorInfoViewHeight = 85;
 CGFloat kLikesViewHeight = 52;
 UIEdgeInsets kContentInsets = (UIEdgeInsets){0, 20, 0, 20};
 
-@implementation BlogContentViewController
+@implementation BlogContentViewController{
+    CGSize _actualContentSize;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.authorInfoView];
     [self.view addSubview:self.contentLabel];
     [self.view addSubview:self.likesView];
+    if (self.showMoreButton) {
+        [self.view addSubview:self.moreButton];
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     self.authorInfoView.timeLabel.text = @"9:16 AM";
     self.authorInfoView.nameLabel.text = @"Carol Rios";
@@ -49,8 +55,19 @@ UIEdgeInsets kContentInsets = (UIEdgeInsets){0, 20, 0, 20};
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     self.authorInfoView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), kAuthorInfoViewHeight);
-    self.contentLabel.frame = CGRectMake(kContentInsets.left, kAuthorInfoViewHeight, CGRectGetWidth(self.view.bounds) - kContentInsets.left - kContentInsets.right, CGRectGetHeight(self.view.bounds) - kAuthorInfoViewHeight - 20 - kLikesViewHeight);
-    self.likesView.frame = (CGRect){0, CGRectGetMaxY(self.contentLabel.frame) + 20, CGRectGetWidth(self.view.bounds), kLikesViewHeight};
+    
+    CGFloat viewHeight = CGRectGetHeight(self.view.frame);
+    CGFloat contentHeight = [self heightForFit];
+    if (viewHeight < contentHeight && self.showMoreButton) {
+        self.moreButton.hidden = NO;
+        self.contentLabel.frame = CGRectMake(kContentInsets.left, kAuthorInfoViewHeight, CGRectGetWidth(self.view.bounds) - kContentInsets.left - kContentInsets.right, CGRectGetHeight(self.view.bounds) - kAuthorInfoViewHeight - 20 - kLikesViewHeight - 32);
+        self.moreButton.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2., CGRectGetMaxY(self.contentLabel.frame) + 10 + 16);
+        self.likesView.frame = (CGRect){0, CGRectGetMaxY(self.moreButton.frame) + 10, CGRectGetWidth(self.view.bounds), kLikesViewHeight};
+    } else {
+        self.moreButton.hidden = YES;
+        self.contentLabel.frame = CGRectMake(kContentInsets.left, kAuthorInfoViewHeight, CGRectGetWidth(self.view.bounds) - kContentInsets.left - kContentInsets.right, CGRectGetHeight(self.view.bounds) - kAuthorInfoViewHeight - 20 - kLikesViewHeight);
+        self.likesView.frame = (CGRect){0, CGRectGetMaxY(self.contentLabel.frame) + 20, CGRectGetWidth(self.view.bounds), kLikesViewHeight};
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +75,7 @@ UIEdgeInsets kContentInsets = (UIEdgeInsets){0, 20, 0, 20};
 }
 
 - (CGFloat)heightForFit{
-    return kAuthorInfoViewHeight + self.contentLabel.textLayout.textBoundingSize.height + 20 + kLikesViewHeight;
+    return kAuthorInfoViewHeight + _actualContentSize.height + 20 + kLikesViewHeight;
 }
 
 #pragma mark - actions
@@ -158,10 +175,20 @@ UIEdgeInsets kContentInsets = (UIEdgeInsets){0, 20, 0, 20};
         YYTextLayout *layout = [YYTextLayout layoutWithContainerSize:size text:content];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.contentLabel.textLayout = layout;
+            _actualContentSize = layout.textBoundingSize;
             [self.view setNeedsLayout];
-            [self.view layoutIfNeeded];
+            if (self.finishLayoutBlock) {
+                self.finishLayoutBlock();
+            }
         });
     });
+}
+
+- (void)needExpand:(id)sender{
+    if (self.expandContentBlock) {
+        CGFloat height = [self heightForFit];
+        self.expandContentBlock(height);
+    }
 }
 
 #pragma mark - getters and setters
@@ -190,6 +217,20 @@ UIEdgeInsets kContentInsets = (UIEdgeInsets){0, 20, 0, 20};
         _contentLabel.textVerticalAlignment = YYTextVerticalAlignmentTop;
     }
     return _contentLabel;
+}
+- (UIButton *)moreButton{
+    if (!_moreButton) {
+        _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 175, 32)];
+        [_moreButton setBackgroundImage:[UIImage imageNamed:@"expand_button"] forState:UIControlStateNormal];
+        [_moreButton setTitle:@"Expand" forState:UIControlStateNormal];
+        [_moreButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
+        [_moreButton setImageEdgeInsets:UIEdgeInsetsMake(0, 120, 0, 0)];
+        [_moreButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 30)];
+        [_moreButton addTarget:self action:@selector(needExpand:) forControlEvents:UIControlEventTouchUpInside];
+        [_moreButton setTitleColor:[UIColor colorWithRed:0x9A/255. green:0x8E/255. blue:0xF3/255. alpha:1.] forState:UIControlStateNormal];
+        _moreButton.adjustsImageWhenHighlighted = NO;
+    }
+    return _moreButton;
 }
 
 - (BlogLikesView *)likesView{

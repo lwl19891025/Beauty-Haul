@@ -59,6 +59,7 @@
 		3A8320BB1F8750C4001340E2 /* BlogLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8320BA1F8750C4001340E2 /* BlogLikesViewController.m */; };
 		3A8320BE1F875B30001340E2 /* ActionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8320BD1F875B30001340E2 /* ActionListView.m */; };
 		3ABAAD4E1F73F4E00009953C /* BlogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */; };
+		3AF04C9C1F93A256002B96ED /* videoblog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3AF04C9B1F93A255002B96ED /* videoblog.xml */; };
 		AED8A0920568F58C38107867 /* libPods-Beautyhaul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24F98089CDFCA0D7799C2DC /* libPods-Beautyhaul.a */; };
 		BAD7EF2A55E061262128C1D6 /* libPods-BeautyhaulUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA09C74EE99A673C7603A97 /* libPods-BeautyhaulUITests.a */; };
 		DAB55A068E6B14702ACFDD93 /* libPods-BeautyhaulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */; };
@@ -181,6 +182,7 @@
 		3A8320BD1F875B30001340E2 /* ActionListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionListView.m; sourceTree = "<group>"; };
 		3ABAAD4C1F73F4E00009953C /* BlogEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogEditViewController.h; sourceTree = "<group>"; };
 		3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogEditViewController.m; sourceTree = "<group>"; };
+		3AF04C9B1F93A255002B96ED /* videoblog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = videoblog.xml; sourceTree = "<group>"; };
 		5ECEFDDCB1D9FD4868196D1E /* Pods-BeautyhaulUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeautyhaulTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA448700C5300C67108B6E /* Pods-Beautyhaul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beautyhaul.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beautyhaul/Pods-Beautyhaul.release.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		3A12ED011F6EBD7A000DEFBA /* Beautyhaul */ = {
 			isa = PBXGroup;
 			children = (
+				3AF04C9B1F93A255002B96ED /* videoblog.xml */,
 				3A7770A31F81CB3A006D3F93 /* blog.xml */,
 				3A11A3721F700C1E00777B47 /* Views */,
 				3A12ED761F6EBE1F000DEFBA /* Categories */,
@@ -610,6 +613,7 @@
 				3A11A3811F700DAB00777B47 /* HomeVideoTableViewCell.xib in Resources */,
 				3A12ED731F6EBE05000DEFBA /* SignInOrUpView.xib in Resources */,
 				3A12ED121F6EBD7A000DEFBA /* LaunchScreen.storyboard in Resources */,
+				3AF04C9C1F93A256002B96ED /* videoblog.xml in Resources */,
 				3A7770A41F81CB3A006D3F93 /* blog.xml in Resources */,
 				3A11A37C1F700D7D00777B47 /* HomePollTableViewCell.xib in Resources */,
 				3A11A3861F700DB900777B47 /* HomeBlogTableViewCell.xib in Resources */,
