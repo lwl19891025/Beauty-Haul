@@ -46,14 +46,24 @@
                         <constraint firstItem="pCp-Cs-IzM" firstAttribute="leading" secondItem="j87-bJ-G1S" secondAttribute="leading" id="hn3-hb-WMy"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edT-qr-87C">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="kzT-B5-v9U"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="RNk-Gl-D96" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6LL-bA-qq2"/>
+                <constraint firstItem="edT-qr-87C" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="959-14-6Th"/>
                 <constraint firstItem="j87-bJ-G1S" firstAttribute="leading" secondItem="Gxf-Vg-Fll" secondAttribute="trailing" id="I2F-1B-KLN"/>
                 <constraint firstItem="j87-bJ-G1S" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="TnR-2t-nt9"/>
                 <constraint firstAttribute="bottom" secondItem="j87-bJ-G1S" secondAttribute="bottom" constant="12" id="Ua1-7g-3qF"/>
                 <constraint firstAttribute="bottom" secondItem="Gxf-Vg-Fll" secondAttribute="bottom" id="WeX-9d-0aO"/>
+                <constraint firstAttribute="trailing" secondItem="edT-qr-87C" secondAttribute="trailing" id="Zpw-Ig-Gvr"/>
+                <constraint firstItem="edT-qr-87C" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cW4-b4-Jiv"/>
                 <constraint firstItem="RNk-Gl-D96" firstAttribute="leading" secondItem="j87-bJ-G1S" secondAttribute="trailing" id="jCi-8Z-3iq"/>
                 <constraint firstAttribute="trailing" secondItem="RNk-Gl-D96" secondAttribute="trailing" id="kLe-Oo-bPb"/>
                 <constraint firstItem="Gxf-Vg-Fll" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="myN-9l-K8e"/>

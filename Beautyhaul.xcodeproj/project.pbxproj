@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A001AC81F8BAFEA00C715E5 /* AVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AC71F8BAFEA00C715E5 /* AVPlayerView.m */; };
 		3A11A37B1F700D7D00777B47 /* HomePollTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11A3791F700D7D00777B47 /* HomePollTableViewCell.m */; };
 		3A11A37C1F700D7D00777B47 /* HomePollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11A37A1F700D7D00777B47 /* HomePollTableViewCell.xib */; };
 		3A11A3801F700DAB00777B47 /* HomeVideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11A37E1F700DAB00777B47 /* HomeVideoTableViewCell.m */; };
@@ -48,13 +49,17 @@
 		3A30995E1F8881A900AB734A /* RepliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A30995D1F8881A900AB734A /* RepliesViewController.m */; };
 		3A3099611F8914B800AB734A /* FlexibleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3099601F8914B800AB734A /* FlexibleTextView.m */; };
 		3A5503C31F87C9AF004AFBA1 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5503C21F87C9AF004AFBA1 /* AlertViewController.m */; };
+		3A5D21A11F906F8300325935 /* CommentPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D21A01F906F8300325935 /* CommentPreviewController.m */; };
+		3A5D21A41F90E2F800325935 /* ProductView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D21A31F90E2F800325935 /* ProductView.m */; };
 		3A73D22E1F7BEF1E009167F8 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */; };
 		3A77709E1F81BE63006D3F93 /* BHXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A77709D1F81BE63006D3F93 /* BHXMLParser.m */; };
 		3A7770A41F81CB3A006D3F93 /* blog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A7770A31F81CB3A006D3F93 /* blog.xml */; };
+		3A8133ED1F921146007F6C0B /* BlogContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8133EC1F921146007F6C0B /* BlogContentViewController.m */; };
+		3A8133F61F9250A4007F6C0B /* PageMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8133F51F9250A4007F6C0B /* PageMenuView.m */; };
 		3A8320BB1F8750C4001340E2 /* BlogLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8320BA1F8750C4001340E2 /* BlogLikesViewController.m */; };
 		3A8320BE1F875B30001340E2 /* ActionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8320BD1F875B30001340E2 /* ActionListView.m */; };
 		3ABAAD4E1F73F4E00009953C /* BlogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */; };
-		3AE5736F1F83D7E30039A408 /* BlogCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE5736E1F83D7E30039A408 /* BlogCommentTableViewCell.m */; };
+		3AF04C9C1F93A256002B96ED /* videoblog.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3AF04C9B1F93A255002B96ED /* videoblog.xml */; };
 		AED8A0920568F58C38107867 /* libPods-Beautyhaul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24F98089CDFCA0D7799C2DC /* libPods-Beautyhaul.a */; };
 		BAD7EF2A55E061262128C1D6 /* libPods-BeautyhaulUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA09C74EE99A673C7603A97 /* libPods-BeautyhaulUITests.a */; };
 		DAB55A068E6B14702ACFDD93 /* libPods-BeautyhaulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */; };
@@ -80,6 +85,8 @@
 /* Begin PBXFileReference section */
 		0EBEAB15241DE6E2B47BCF07 /* Pods-BeautyhaulUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2A3E8E0ED310F6EFD3E8A79A /* Pods-BeautyhaulTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulTests/Pods-BeautyhaulTests.release.xcconfig"; sourceTree = "<group>"; };
+		3A001AC61F8BAFEA00C715E5 /* AVPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVPlayerView.h; sourceTree = "<group>"; };
+		3A001AC71F8BAFEA00C715E5 /* AVPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVPlayerView.m; sourceTree = "<group>"; };
 		3A11A3781F700D7D00777B47 /* HomePollTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePollTableViewCell.h; sourceTree = "<group>"; };
 		3A11A3791F700D7D00777B47 /* HomePollTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePollTableViewCell.m; sourceTree = "<group>"; };
 		3A11A37A1F700D7D00777B47 /* HomePollTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePollTableViewCell.xib; sourceTree = "<group>"; };
@@ -156,19 +163,26 @@
 		3A3099601F8914B800AB734A /* FlexibleTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlexibleTextView.m; sourceTree = "<group>"; };
 		3A5503C11F87C9AF004AFBA1 /* AlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
 		3A5503C21F87C9AF004AFBA1 /* AlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		3A5D219F1F906F8300325935 /* CommentPreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentPreviewController.h; sourceTree = "<group>"; };
+		3A5D21A01F906F8300325935 /* CommentPreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentPreviewController.m; sourceTree = "<group>"; };
+		3A5D21A21F90E2F800325935 /* ProductView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductView.h; sourceTree = "<group>"; };
+		3A5D21A31F90E2F800325935 /* ProductView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductView.m; sourceTree = "<group>"; };
 		3A73D22C1F7BEF1E009167F8 /* ProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
 		3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
 		3A77709C1F81BE63006D3F93 /* BHXMLParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHXMLParser.h; sourceTree = "<group>"; };
 		3A77709D1F81BE63006D3F93 /* BHXMLParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHXMLParser.m; sourceTree = "<group>"; };
 		3A7770A31F81CB3A006D3F93 /* blog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blog.xml; sourceTree = "<group>"; };
+		3A8133EB1F921146007F6C0B /* BlogContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogContentViewController.h; sourceTree = "<group>"; };
+		3A8133EC1F921146007F6C0B /* BlogContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogContentViewController.m; sourceTree = "<group>"; };
+		3A8133F41F9250A4007F6C0B /* PageMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageMenuView.h; sourceTree = "<group>"; };
+		3A8133F51F9250A4007F6C0B /* PageMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageMenuView.m; sourceTree = "<group>"; };
 		3A8320B91F8750C4001340E2 /* BlogLikesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogLikesViewController.h; sourceTree = "<group>"; };
 		3A8320BA1F8750C4001340E2 /* BlogLikesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogLikesViewController.m; sourceTree = "<group>"; };
 		3A8320BC1F875B30001340E2 /* ActionListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionListView.h; sourceTree = "<group>"; };
 		3A8320BD1F875B30001340E2 /* ActionListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionListView.m; sourceTree = "<group>"; };
 		3ABAAD4C1F73F4E00009953C /* BlogEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogEditViewController.h; sourceTree = "<group>"; };
 		3ABAAD4D1F73F4E00009953C /* BlogEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogEditViewController.m; sourceTree = "<group>"; };
-		3AE5736D1F83D7E30039A408 /* BlogCommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlogCommentTableViewCell.h; sourceTree = "<group>"; };
-		3AE5736E1F83D7E30039A408 /* BlogCommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogCommentTableViewCell.m; sourceTree = "<group>"; };
+		3AF04C9B1F93A255002B96ED /* videoblog.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = videoblog.xml; sourceTree = "<group>"; };
 		5ECEFDDCB1D9FD4868196D1E /* Pods-BeautyhaulUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeautyhaulUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeautyhaulUITests/Pods-BeautyhaulUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66E3BEAD93AFF25A714D5106 /* libPods-BeautyhaulTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeautyhaulTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68EA448700C5300C67108B6E /* Pods-Beautyhaul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beautyhaul.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beautyhaul/Pods-Beautyhaul.release.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +242,12 @@
 				3A30995F1F8914B800AB734A /* FlexibleTextView.h */,
 				3A3099601F8914B800AB734A /* FlexibleTextView.m */,
 				3A25730A1F8A62F300615EB2 /* FlexibleTextView.xib */,
+				3A001AC61F8BAFEA00C715E5 /* AVPlayerView.h */,
+				3A001AC71F8BAFEA00C715E5 /* AVPlayerView.m */,
+				3A5D21A21F90E2F800325935 /* ProductView.h */,
+				3A5D21A31F90E2F800325935 /* ProductView.m */,
+				3A8133F41F9250A4007F6C0B /* PageMenuView.h */,
+				3A8133F51F9250A4007F6C0B /* PageMenuView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +277,7 @@
 		3A12ED011F6EBD7A000DEFBA /* Beautyhaul */ = {
 			isa = PBXGroup;
 			children = (
+				3AF04C9B1F93A255002B96ED /* videoblog.xml */,
 				3A7770A31F81CB3A006D3F93 /* blog.xml */,
 				3A11A3721F700C1E00777B47 /* Views */,
 				3A12ED761F6EBE1F000DEFBA /* Categories */,
@@ -314,6 +335,10 @@
 				3A12ED4E1F6EBE05000DEFBA /* NavigationViewController.m */,
 				3A12ED551F6EBE05000DEFBA /* RootViewController.h */,
 				3A12ED561F6EBE05000DEFBA /* RootViewController.m */,
+				3A5D219F1F906F8300325935 /* CommentPreviewController.h */,
+				3A5D21A01F906F8300325935 /* CommentPreviewController.m */,
+				3A8133EB1F921146007F6C0B /* BlogContentViewController.h */,
+				3A8133EC1F921146007F6C0B /* BlogContentViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -397,8 +422,6 @@
 				3A73D22D1F7BEF1E009167F8 /* ProductViewController.m */,
 				3A77709C1F81BE63006D3F93 /* BHXMLParser.h */,
 				3A77709D1F81BE63006D3F93 /* BHXMLParser.m */,
-				3AE5736D1F83D7E30039A408 /* BlogCommentTableViewCell.h */,
-				3AE5736E1F83D7E30039A408 /* BlogCommentTableViewCell.m */,
 				3A8320B91F8750C4001340E2 /* BlogLikesViewController.h */,
 				3A8320BA1F8750C4001340E2 /* BlogLikesViewController.m */,
 				3A5503C11F87C9AF004AFBA1 /* AlertViewController.h */,
@@ -590,6 +613,7 @@
 				3A11A3811F700DAB00777B47 /* HomeVideoTableViewCell.xib in Resources */,
 				3A12ED731F6EBE05000DEFBA /* SignInOrUpView.xib in Resources */,
 				3A12ED121F6EBD7A000DEFBA /* LaunchScreen.storyboard in Resources */,
+				3AF04C9C1F93A256002B96ED /* videoblog.xml in Resources */,
 				3A7770A41F81CB3A006D3F93 /* blog.xml in Resources */,
 				3A11A37C1F700D7D00777B47 /* HomePollTableViewCell.xib in Resources */,
 				3A11A3861F700DB900777B47 /* HomeBlogTableViewCell.xib in Resources */,
@@ -767,6 +791,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8133ED1F921146007F6C0B /* BlogContentViewController.m in Sources */,
 				3A11A3801F700DAB00777B47 /* HomeVideoTableViewCell.m in Sources */,
 				3A12ED071F6EBD7A000DEFBA /* AppDelegate.m in Sources */,
 				3A12ED601F6EBE05000DEFBA /* UIViewController+Content.m in Sources */,
@@ -789,17 +814,20 @@
 				3A12ED671F6EBE05000DEFBA /* IntroductionViewController.m in Sources */,
 				3A283AA11F7161990045CDC0 /* HomeTableViewCell.m in Sources */,
 				3A11A3851F700DB900777B47 /* HomeBlogTableViewCell.m in Sources */,
+				3A5D21A11F906F8300325935 /* CommentPreviewController.m in Sources */,
 				3A5503C31F87C9AF004AFBA1 /* AlertViewController.m in Sources */,
+				3A5D21A41F90E2F800325935 /* ProductView.m in Sources */,
 				3A11A37B1F700D7D00777B47 /* HomePollTableViewCell.m in Sources */,
+				3A001AC81F8BAFEA00C715E5 /* AVPlayerView.m in Sources */,
 				3A11A38F1F700DF600777B47 /* HomeQATableViewCell.m in Sources */,
 				3A12ED6D1F6EBE05000DEFBA /* PollViewController.m in Sources */,
 				3A12ED041F6EBD7A000DEFBA /* main.m in Sources */,
 				3A12ED691F6EBE05000DEFBA /* LoginViewController.m in Sources */,
-				3AE5736F1F83D7E30039A408 /* BlogCommentTableViewCell.m in Sources */,
 				3A12ED641F6EBE05000DEFBA /* FindViewController.m in Sources */,
 				3A12ED701F6EBE05000DEFBA /* RootViewController.m in Sources */,
 				3A12ED651F6EBE05000DEFBA /* FirstIntroductionViewController.m in Sources */,
 				3A12ED741F6EBE05000DEFBA /* ThirdIntroductionViewController.m in Sources */,
+				3A8133F61F9250A4007F6C0B /* PageMenuView.m in Sources */,
 				3A12ED6F1F6EBE05000DEFBA /* QAViewController.m in Sources */,
 				3A12ED681F6EBE05000DEFBA /* LaunchViewController.m in Sources */,
 				3A30995E1F8881A900AB734A /* RepliesViewController.m in Sources */,
