@@ -9,5 +9,6 @@
 #import "HomeTableViewCell.h"
 
 @interface HomeVideoTableViewCell : HomeTableViewCell
-
+@property (weak, nonatomic) IBOutlet UIImageView *demoImage;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @end
